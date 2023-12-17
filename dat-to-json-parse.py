@@ -56,6 +56,16 @@ tables_dict = [
                          'ss_ext_tax','ss_coupon_amt','ss_net_paid','ss_net_paid_inc_tax','ss_net_profit'
                         ]
     },
+    {
+        'table_name': 'call_center',
+        'file_path': os.path.join(script_directory, 'data', 'call_center.dat'),
+        'column_names': ['cc_call_center_sk','cc_call_center_id','cc_rec_start_date','cc_rec_end_date',
+                         'cc_closed_date_sk','cc_open_date_sk','cc_name','cc_class','cc_employees','cc_sq_ft',
+                         'cc_hours','cc_manager','cc_mkt_id','cc_mkt_class','cc_mkt_desc','cc_market_manager'
+                         'cc_division','cc_division_name','cc_company','cc_company_name','cc_street_number',
+                         'cc_street_name','cc_street_type','cc_suite_number','cc_city','cc_county','cc_state'
+                         'cc_zip','cc_country','cc_gmt_offset','cc_tax_percentage']
+    },
 ]
 
 for table in tables_dict:

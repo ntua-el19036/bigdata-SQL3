@@ -34,8 +34,8 @@ tables_dict = [
                          'cc_zip','cc_country','cc_gmt_offset','cc_tax_percentage']
     },
     {
-        'table_name': 'customer_demographics',
-        'file_path': os.path.join(script_directory, 'data', 'customer_demographics.dat'),
+        'table_name': 'catalog_sales',
+        'file_path': os.path.join(script_directory, 'data', 'catalog_sales.dat'),
         'column_names': ['cs_sold_date_sk','cs_sold_time_sk','cs_ship_date_sk','cs_bill_customer_sk','cs_bill_cdemo_sk','cs_bill_hdemo_sk','cs_bill_addr_sk',
                          'cs_ship_customer_sk','cs_ship_cdemo_sk','cs_ship_hdemo_sk','cs_ship_addr_sk','cs_call_center_sk','cs_catalog_page_sk','cs_ship_mode_sk',
                          'cs_warehouse_sk','cs_item_sk','cs_promo_sk','cs_order_number','cs_quantity','cs_wholesale_cost','cs_list_price','cs_sales_price',

@@ -24,6 +24,25 @@ os.makedirs(output_folder, exist_ok=True)
 # Read .dat file and write key-value data to a single file
 tables_dict = [
     {
+        'table_name': 'item',
+        'file_path': os.path.join(script_directory, 'data', 'item.dat'),
+        'column_names': ['i_item_sk','i_item_id','i_rec_start_date','i_rec_end_date','i_item_desc','i_current_price','i_wholesale_cost','i_brand_id','i_brand',
+                         'i_class_id','i_class','i_category_id','i_category','i_manufact_id','i_manufact','i_size','i_formulation','i_color','i_units ',
+                         'i_container','i_manager_id ','i_product_name ']
+    },
+    {
+        'table_name': 'promotion',
+        'file_path': os.path.join(script_directory, 'data', 'promotion.dat'),
+        'column_names': ['p_promo_sk','p_promo_id','p_start_date_sk','p_end_date_sk','p_item_sk','p_cost','p_response_target','p_promo_name','p_channel_dmail',
+                         'p_channel_email','p_channel_catalog','p_channel_tv','p_channel_radio','p_channel_press','p_channel_event','p_channel_demo',
+                         'p_channel_details','p_purpose','p_discount_active']
+    },
+    {
+        'table_name': 'reason',
+        'file_path': os.path.join(script_directory, 'data', 'reason.dat'),
+        'column_names': ['r_reason_sk','r_reason_id','r_reason_desc']
+    },
+    {
         'table_name': 'ship_mode',
         'file_path': os.path.join(script_directory, 'data', 'ship_mode.dat'),
         'column_names': ['sm_ship_mode_sk','sm_ship_mode_id','sm_type','sm_code','sm_carrier','sm_contract']

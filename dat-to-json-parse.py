@@ -40,7 +40,7 @@ tables_dict = [
     },
     {
         'table_name': 'catalog_returns',
-        'file_path': os.path.join(parent_directory, 'data', 'customer_returns.dat'),
+        'file_path': os.path.join(parent_directory, 'data', 'catalog_returns.dat'),
         'column_names': ['cr_returned_date_sk','cr_returned_time_sk','cr_item_sk','cr_refunded_customer_sk','cr_refunded_cdemo_sk','cr_refunded_hdemo_sk',
                          'cr_refunded_addr_sk','cr_returning_customer_sk','cr_returning_cdemo_sk','cr_returning_hdemo_sk','cr_returning_addr_sk',
                          'cr_call_center_sk','cr_catalog_page_sk']

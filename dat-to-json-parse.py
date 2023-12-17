@@ -34,6 +34,21 @@ tables_dict = [
                          'cc_zip','cc_country','cc_gmt_offset','cc_tax_percentage']
     },
     {
+        'table_name': 'customer_demographics',
+        'file_path': os.path.join(script_directory, 'data', 'customer_demographics.dat'),
+        'column_names': ['cs_sold_date_sk','cs_sold_time_sk','cs_ship_date_sk','cs_bill_customer_sk','cs_bill_cdemo_sk','cs_bill_hdemo_sk','cs_bill_addr_sk',
+                         'cs_ship_customer_sk','cs_ship_cdemo_sk','cs_ship_hdemo_sk','cs_ship_addr_sk','cs_call_center_sk','cs_catalog_page_sk','cs_ship_mode_sk',
+                         'cs_warehouse_sk','cs_item_sk','cs_promo_sk','cs_order_number','cs_quantity','cs_wholesale_cost','cs_list_price','cs_sales_price',
+                         'cs_ext_discount_amt','cs_ext_sales_price','cs_ext_wholesale_cost','cs_ext_list_price','cs_ext_tax','cs_coupon_amt','cs_ext_ship_cost',
+                         'cs_net_paid','cs_net_paid_inc_tax','cs_net_paid_inc_ship','cs_net_paid_inc_ship_tax','cs_net_profit']
+    },
+    {
+        'table_name': 'customer_demographics',
+        'file_path': os.path.join(script_directory, 'data', 'customer_demographics.dat'),
+        'column_names': ['cd_demo_sk','cd_gender','cd_marital_status','cd_education_status','cd_purchase_estimate','cd_credit_rating','cd_dep_count',
+                         'cd_dep_employed_count','cd_dep_college_count']
+    },
+    {
         'table_name': 'date_dim',
         'file_path': os.path.join(script_directory, 'data', 'date_dim.dat'),
         'column_names': ['d_date_sk','d_date_id','d_date','d_month_seq','d_week_seq','d_quarter_seq','d_year','d_dow','d_moy','d_dom','d_qoy','d_fy_year',

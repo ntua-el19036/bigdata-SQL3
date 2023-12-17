@@ -34,11 +34,38 @@ tables_dict = [
                          'cc_zip','cc_country','cc_gmt_offset','cc_tax_percentage']
     },
     {
+        'table_name': 'date_dim',
+        'file_path': os.path.join(script_directory, 'data', 'date_dim.dat'),
+        'column_names': ['d_date_sk','d_date_id','d_date','d_month_seq','d_week_seq','d_quarter_seq','d_year','d_dow','d_moy','d_dom','d_qoy','d_fy_year',
+                         'd_fy_quarter_seq','d_fy_week_seq','d_day_name','d_quarter_name','d_holiday','d_weekend','d_following_holiday','d_first_dom','d_last_dom',
+                         'd_same_day_ly','d_same_day_lq','d_current_day','d_current_week','d_current_month','d_current_quarter','d_current_year']
+    },
+    {
+        'table_name': 'dbgen_version',
+        'file_path': os.path.join(script_directory, 'data', 'dbgen_version.dat'),
+        'column_names': ['dv_version','dv_create_date','dv_create_time','dv_cmdline_args']
+    },
+    {
+        'table_name': 'household_demographics',
+        'file_path': os.path.join(script_directory, 'data', 'household_demographics.dat'),
+        'column_names': ['hd_demo_sk','hd_income_band_sk','hd_buy_potential','hd_dep_count','hd_vehicle_count']
+    },
+    {
+        'table_name': 'income_band',
+        'file_path': os.path.join(script_directory, 'data', 'income_band.dat'),
+        'column_names': ['ib_income_band_sk','ib_lower_bound','ib_upper_bound']
+    },
+    {
+        'table_name': 'inventory',
+        'file_path': os.path.join(script_directory, 'data', 'inventory.dat'),
+        'column_names': ['inv_date_sk','inv_item_sk','inv_warehouse_sk','inv_quantity_on_hand']
+    },
+    {
         'table_name': 'item',
         'file_path': os.path.join(script_directory, 'data', 'item.dat'),
         'column_names': ['i_item_sk','i_item_id','i_rec_start_date','i_rec_end_date','i_item_desc','i_current_price','i_wholesale_cost','i_brand_id','i_brand',
-                         'i_class_id','i_class','i_category_id','i_category','i_manufact_id','i_manufact','i_size','i_formulation','i_color','i_units ',
-                         'i_container','i_manager_id ','i_product_name ']
+                         'i_class_id','i_class','i_category_id','i_category','i_manufact_id','i_manufact','i_size','i_formulation','i_color','i_units',
+                         'i_container','i_manager_id','i_product_name']
     },
     {
         'table_name': 'promotion',

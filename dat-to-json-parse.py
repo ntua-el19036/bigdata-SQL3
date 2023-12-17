@@ -34,6 +34,14 @@ tables_dict = [
                          'cc_zip','cc_country','cc_gmt_offset','cc_tax_percentage']
     },
     {
+        'table_name': 'catalog_page',
+        'file_path': os.path.join(script_directory, 'data', 'catalog_page.dat'),
+        'column_names': ['cp_catalog_page_sk','cp_catalog_page_id','cp_start_date_sk','cp_end_date_sk',
+                         'cp_department','cp_catalog_number','cp_catalog_page_number','cp_description',
+                         'cp_type'
+                        ]
+    },
+    {
         'table_name': 'catalog_sales',
         'file_path': os.path.join(script_directory, 'data', 'catalog_sales.dat'),
         'column_names': ['cs_sold_date_sk','cs_sold_time_sk','cs_ship_date_sk','cs_bill_customer_sk','cs_bill_cdemo_sk','cs_bill_hdemo_sk','cs_bill_addr_sk',
@@ -41,6 +49,29 @@ tables_dict = [
                          'cs_warehouse_sk','cs_item_sk','cs_promo_sk','cs_order_number','cs_quantity','cs_wholesale_cost','cs_list_price','cs_sales_price',
                          'cs_ext_discount_amt','cs_ext_sales_price','cs_ext_wholesale_cost','cs_ext_list_price','cs_ext_tax','cs_coupon_amt','cs_ext_ship_cost',
                          'cs_net_paid','cs_net_paid_inc_tax','cs_net_paid_inc_ship','cs_net_paid_inc_ship_tax','cs_net_profit']
+    },
+    {
+        'table_name': 'customer',
+        'file_path': os.path.join(script_directory, 'data', 'customer.dat'),
+        'column_names': ['c_customer_sk','c_customer_id','c_current_cdemo_sk','c_current_hdemo_sk','c_current_addr_sk',
+                         'c_first_shipto_date_sk','c_first_sales_date_sk','c_salutation','c_first_name','c_last_name',
+                         'c_preferred_cust_flag','c_birth_day','c_birth_month','c_birth_year','c_birth_country',
+                         'c_login','c_email_address','c_last_review_date_sk'
+                        ]
+    },
+    {
+        'table_name': 'customer_address',
+        'file_path': os.path.join(script_directory, 'data', 'customer_address.dat'),
+        'column_names': ['ca_address_sk','ca_address_id','ca_street_number'
+                        ]
+    },
+    {
+        'table_name': 'customer_returns',
+        'file_path': os.path.join(script_directory, 'data', 'customer_returns.dat'),
+        'column_names': ['cr_returned_date_sk','cr_returned_time_sk','cr_item_sk','cr_refunded_customer_sk','cr_refunded_cdemo_sk',
+                         'cr_refunded_hdemo_sk','cr_refunded_addr_sk','cr_returning_customer_sk','cr_returning_cdemo_sk',
+                         'cr_returning_hdemo_sk','cr_returning_addr_sk','cr_call_center_sk','cr_catalog_page_sk'
+                        ]
     },
     {
         'table_name': 'customer_demographics',

@@ -112,6 +112,59 @@ tables_dict = [
                          'ss_ext_tax','ss_coupon_amt','ss_net_paid','ss_net_paid_inc_tax','ss_net_profit'
                         ]
     },
+    {
+        'table_name': 'time_dim',
+        'file_path': os.path.join(script_directory, 'data', 'time_dim.dat'),
+        'column_names': ['t_time_sk','t_time_id','t_time','t_hour','t_minute','t_second',
+                         't_am_pm','t_shift','t_sub_shift','t_meal_time'
+                        ]
+    },
+    {
+        'table_name': 'warehouse',
+        'file_path': os.path.join(script_directory, 'data', 'warehouse.dat'),
+        'column_names': ['w_warehouse_sk','w_warehouse_id','w_warehouse_name','w_warehouse_sq_ft','w_street_number','w_street_name',
+                         'w_street_type','w_suite_number','w_city','w_county','w_state','w_zip',
+                         'w_country','w_gmt_offset'
+                        ]
+    },
+    {
+        'table_name': 'web_page',
+        'file_path': os.path.join(script_directory, 'data', 'web_page.dat'),
+        'column_names': ['wp_web_page_sk','wp_web_page_id','wp_rec_start_date','wp_rec_end_date','wp_creation_date_sk','wp_access_date_sk',
+                         'wp_autogen_flag','wp_customer_sk','wp_url','wp_type','wp_char_count','wp_link_count',
+                         'wp_image_count','wp_max_ad_count'
+                        ]
+    },
+    {
+        'table_name': 'web_returns',
+        'file_path': os.path.join(script_directory, 'data', 'web_returns.dat'),
+        'column_names': ['wr_returned_date_sk','wr_returned_time_sk','wr_item_sk','wr_refunded_customer_sk','wr_refunded_cdemo_sk','wr_refunded_hdemo_sk',
+                         'wr_refunded_addr_sk','wr_returning_customer_sk','wr_returning_cdemo_sk','wr_returning_hdemo_sk','wr_returning_addr_sk','wr_web_page_sk',
+                         'wr_reason_sk','wr_order_number','wr_return_quantity','wr_return_amt','wr_return_tax','wr_return_amt_inc_tax',
+                         'wr_fee','wr_return_ship_cost','wr_refunded_cash','wr_reversed_charge','wr_account_credit','wr_net_loss'
+                        ]
+    },
+    {
+        'table_name': 'web_sales',
+        'file_path': os.path.join(script_directory, 'data', 'web_sales.dat'),
+        'column_names': ['ws_sold_date_sk','ws_sold_time_sk','ws_ship_date_sk','ws_item_sk','ws_bill_customer_sk','ws_bill_cdemo_sk',
+                         'ws_bill_hdemo_sk','ws_bill_addr_sk','ws_ship_customer_sk','ws_ship_cdemo_sk','ws_ship_hdemo_sk','ws_ship_addr_sk',
+                         'ws_web_page_sk','ws_web_site_sk','ws_ship_mode_sk','ws_warehouse_sk','ws_promo_sk','ws_order_number',
+                         'ws_quantity','ws_wholesale_cost','ws_list_price','ws_sales_price','ws_ext_discount_amt','ws_ext_sales_price',
+                         'ws_ext_wholesale_cost','ws_ext_list_price','ws_ext_tax','ws_coupon_amt','ws_ext_ship_cost','ws_net_paid',
+                         'ws_net_paid_inc_tax','ws_net_paid_inc_ship','ws_net_paid_inc_ship_tax','ws_net_profit'
+                        ]
+    },
+    {
+        'table_name': 'web_site',
+        'file_path': os.path.join(script_directory, 'data', 'web_site.dat'),
+        'column_names': ['web_site_sk','web_site_id','web_rec_start_date','web_rec_end_date','web_name','web_open_date_sk',
+                         'web_close_date_sk','web_class','web_manager','web_mkt_id','web_mkt_class','web_mkt_desc',
+                         'web_market_manager','web_company_id','web_company_name','web_street_number','web_street_name','web_street_type',
+                         'web_suite_number','web_city','web_county','web_state','web_zip','web_country',
+                         'web_gmt_offset','web_tax_percentage'
+                        ]
+    },
 ]
 
 for table in tables_dict:

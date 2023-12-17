@@ -24,6 +24,16 @@ os.makedirs(output_folder, exist_ok=True)
 # Read .dat file and write key-value data to a single file
 tables_dict = [
     {
+        'table_name': 'call_center',
+        'file_path': os.path.join(script_directory, 'data', 'call_center.dat'),
+        'column_names': ['cc_call_center_sk','cc_call_center_id','cc_rec_start_date','cc_rec_end_date',
+                         'cc_closed_date_sk','cc_open_date_sk','cc_name','cc_class','cc_employees','cc_sq_ft',
+                         'cc_hours','cc_manager','cc_mkt_id','cc_mkt_class','cc_mkt_desc','cc_market_manager'
+                         'cc_division','cc_division_name','cc_company','cc_company_name','cc_street_number',
+                         'cc_street_name','cc_street_type','cc_suite_number','cc_city','cc_county','cc_state'
+                         'cc_zip','cc_country','cc_gmt_offset','cc_tax_percentage']
+    },
+    {
         'table_name': 'item',
         'file_path': os.path.join(script_directory, 'data', 'item.dat'),
         'column_names': ['i_item_sk','i_item_id','i_rec_start_date','i_rec_end_date','i_item_desc','i_current_price','i_wholesale_cost','i_brand_id','i_brand',
@@ -74,16 +84,6 @@ tables_dict = [
                          'ss_list_price','ss_sales_price','ss_ext_discount_amt','ss_ext_sales_price','ss_ext_wholesale_cost','ss_ext_list_price',
                          'ss_ext_tax','ss_coupon_amt','ss_net_paid','ss_net_paid_inc_tax','ss_net_profit'
                         ]
-    },
-    {
-        'table_name': 'call_center',
-        'file_path': os.path.join(script_directory, 'data', 'call_center.dat'),
-        'column_names': ['cc_call_center_sk','cc_call_center_id','cc_rec_start_date','cc_rec_end_date',
-                         'cc_closed_date_sk','cc_open_date_sk','cc_name','cc_class','cc_employees','cc_sq_ft',
-                         'cc_hours','cc_manager','cc_mkt_id','cc_mkt_class','cc_mkt_desc','cc_market_manager'
-                         'cc_division','cc_division_name','cc_company','cc_company_name','cc_street_number',
-                         'cc_street_name','cc_street_type','cc_suite_number','cc_city','cc_county','cc_state'
-                         'cc_zip','cc_country','cc_gmt_offset','cc_tax_percentage']
     },
 ]
 

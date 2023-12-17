@@ -39,6 +39,13 @@ tables_dict = [
                          'cp_catalog_page_number','cp_description','cp_type']
     },
     {
+        'table_name': 'catalog_returns',
+        'file_path': os.path.join(parent_directory, 'data', 'customer_returns.dat'),
+        'column_names': ['cr_returned_date_sk','cr_returned_time_sk','cr_item_sk','cr_refunded_customer_sk','cr_refunded_cdemo_sk','cr_refunded_hdemo_sk',
+                         'cr_refunded_addr_sk','cr_returning_customer_sk','cr_returning_cdemo_sk','cr_returning_hdemo_sk','cr_returning_addr_sk',
+                         'cr_call_center_sk','cr_catalog_page_sk']
+    },
+    {
         'table_name': 'catalog_sales',
         'file_path': os.path.join(parent_directory, 'data', 'catalog_sales.dat'),
         'column_names': ['cs_sold_date_sk','cs_sold_time_sk','cs_ship_date_sk','cs_bill_customer_sk','cs_bill_cdemo_sk','cs_bill_hdemo_sk','cs_bill_addr_sk',
@@ -60,13 +67,6 @@ tables_dict = [
         'column_names': ['ca_address_sk','ca_address_id','ca_street_number','ca_street_name','ca_street_type','ca_suite_number','ca_city',
                          'ca_county','ca_state','ca_zip','ca_country','ca_gmt_offset','ca_location_type'
                         ]
-    },
-    {
-        'table_name': 'customer_returns',
-        'file_path': os.path.join(parent_directory, 'data', 'customer_returns.dat'),
-        'column_names': ['cr_returned_date_sk','cr_returned_time_sk','cr_item_sk','cr_refunded_customer_sk','cr_refunded_cdemo_sk','cr_refunded_hdemo_sk',
-                         'cr_refunded_addr_sk','cr_returning_customer_sk','cr_returning_cdemo_sk','cr_returning_hdemo_sk','cr_returning_addr_sk',
-                         'cr_call_center_sk','cr_catalog_page_sk']
     },
     {
         'table_name': 'customer_demographics',

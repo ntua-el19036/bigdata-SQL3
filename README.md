@@ -44,29 +44,21 @@ For the MongoDB installation in Ubuntu 22.04:
 
 ### Apache Cassandra
 For the Cassandra installation in Ubuntu 22.04:
-1. Install the necessary package to enable access to the repositories using HTTPS with the command:
+1. Download the binary tarball from one of the mirrors on the Apache Cassandra Download site with the command:
   ```
-  sudo apt install apt-transport-https
+  curl -OL https://dlcdn.apache.org/cassandra/4.0.11/apache-cassandra-4.0.11-bin.tar.gz
   ```
-2. Add the Cassandra repository to the sources list with the command:
+2. To verify the integrity of the downloaded tarball you can compare the signature with the SHA256 file from the Downloads site:
   ```
-  echo "deb https://debian.cassandra.apache.org 40x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+  gpg --print-md SHA256 apache-cassandra-4.0.11-bin.tar.gz
   ```
-3. Import the GPG key with the command:
+3. Unpack the tarball with the command:
   ```
-  curl https://downloads.apache.org/cassandra/KEYS | sudo apt-key add -
+  tar xzvf apache-cassandra-4.0.11-bin.tar.gz
   ```
-4. Update the repositories:
+4. To start the CQL shell:
   ```
-  sudo apt-get update
-  ```
-5. Install Apache Cassandra:
-  ```
-  sudo apt install cassandra
-  ```
-7. To check the status of Cassandra:
-  ```
-  sudo systemctl status cassandra
+  cd apache-cassandra-4.0.11/ && bin/cqlsh
   ```
 </details>
 

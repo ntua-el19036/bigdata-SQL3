@@ -1,6 +1,6 @@
 import os
 import json
-from config.tables import tables_dict
+from config.tables-redis import tables_dict
 
 def generate_table_definition(table):
     table_name = table['table_name']

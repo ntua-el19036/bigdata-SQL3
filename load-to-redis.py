@@ -1,7 +1,7 @@
 import json
 import os
 import redis
-from config.tables import tables_dict
+from config.tables-redis import tables_dict
 
 def insert_into_redis(json_file, table_name, unique_key, redis_client):
     with open(json_file, 'r') as file:

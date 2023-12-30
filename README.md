@@ -56,9 +56,13 @@ For the Cassandra installation in Ubuntu 22.04:
   ```
   tar xzvf apache-cassandra-4.0.11-bin.tar.gz
   ```
-4. To start the CQL shell:
+4. To start Cassandra:
   ```
-  cd apache-cassandra-4.0.11/ && bin/cqlsh
+  cd apache-cassandra-4.0.0/ && bin/cassandra
+  ```
+5. To start the CQL shell:
+  ```
+  bin/cqlsh
   ```
 </details>
 

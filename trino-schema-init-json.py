@@ -13,10 +13,7 @@ def generate_table_definition(table):
     table_definition = {
         "tableName": table_name,
         "schemaName": schema_name,
-        
-    }
-    if(table['primary_key'] == '' or table['has_date'] == 'True'):
-        table_definition['key'] = {
+        "key": {
             "dataFormat": "raw",
             "fields": [
                 {
@@ -25,16 +22,12 @@ def generate_table_definition(table):
                     "hidden": "true"
                 }
             ]
-        }
-        table_definition['value'] = {
+        },
+        "value": {
             "dataFormat": "json",
             "fields": []
         }
-    else:
-        table_definition['value'] = {
-            "dataFormat": "hash",
-            "fields": []
-        }
+    }
 
     for name, datatype in zip(column_names, column_datatypes):
         field = {
@@ -65,7 +58,7 @@ def main():
         with open(json_file_path, 'w') as json_file:
             json.dump(table_definition, json_file, indent=4)
 
-        print(f"Table definition for '{table['table_name']}' written to '{json_file_path}'.")
+        print(f"Table definition for '{table['table_name']}' written to '{json_file_path}'. (JSON STRING FORMAT)")
 
 if __name__ == "__main__":
     main()

@@ -1,27 +1,28 @@
+# This is a script that loads table data into redis in the format:
+# key -> {schema_name}:{table_name}:{line_num}
+# value -> JSON String with columns as properties
+#
+# Pair with script trino-schema-init-json.py to initialize table definition files
+
 import json
 import os
 import redis
 from config.tables_redis_for_json import tables_dict
 
-def insert_into_redis(json_file, table_name, has_pk, has_date, redis_client, primary_key):
+def insert_into_redis(json_file, table_name, redis_client):
     schema_name = 'tpcds'
-    table_prefix = f"{schema_name}:{table_name}:"
     with open(json_file, 'r') as file:
         for line_num, line in enumerate(file, start=1):
             data = json.loads(line)
-            if(has_date or not has_pk):
-                # Constructing the Redis key with schema name (tpcds), table name, and a row counter
-                row_key = table_prefix + f"{line_num}"
+                        
+            # Constructing the Redis key with schema name (tpcds), table name, and a row counter
+            row_key = f"{schema_name}:{table_name}:{line_num}"
 
-                # Convert the entire data to a JSON string
-                json_data = json.dumps(data)
+            # Convert the entire data to a JSON string
+            json_data = json.dumps(data)
 
-                # Use set to store the JSON string as the value for the key
-                redis_client.set(row_key, json_data)
-            else:
-                hash_key = table_prefix + data[primary_key]
-
-                redis_client.hset(hash_key, mapping=data)
+            # Use set to store the JSON string as the value for the key
+            redis_client.set(row_key, json_data)
 
 def main():
     # Redis connection parameters
@@ -38,11 +39,10 @@ def main():
     # Iterate through the JSON files and insert data into Redis
     for table in tables_dict:
         table_name = table['table_name']
-        has_date = (table['has_date'] == 'True')
-        has_pk = (table['primary_key'] != '')
+        print(table['table_name'])
         json_file = os.path.join(json_data_folder, f"{table_name}.json")
         if os.path.exists(json_file):
-            insert_into_redis(json_file, table_name, has_pk, has_date, redis_client, table['primary_key'])
+            insert_into_redis(json_file, table_name, redis_client)
             print(f"Data for table '{table_name}' inserted into Redis.")
 
 if __name__ == "__main__":

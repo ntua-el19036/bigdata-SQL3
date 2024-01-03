@@ -67,6 +67,16 @@ For the Cassandra installation in Ubuntu 22.04:
 </details>
 
 ## Data Parsing
-To parse the raw data:
+The raw data from `.dat` files are parsed and converted to `.json` to be loaded to Mongo and Redis:
 - have the `.dat` files in a directory named "_data_", in the directory where you cloned this repo
-- run the script
+- run the script "_dat-to-json.-parse.py_"
+
+The raw data from .dat files are parsed and converted to .csv to be loaded to Cassandra:
+- have the `.dat` files in a directory named "_data_", in the directory where you cloned this repo
+- run the script "_convert-to-csv.py_"
+
+## Data Loading
+We used dsbulk to load csv files to Cassanda. The steps to install it are:
+1. Download the binary tarball from the DSBulk Loader's Github repo: https://github.com/datastax/dsbulk/releases/tag/1.11.0
+2. Unpack the downloaded distribution
+3. Verify the dsbulk version with the command : ```dsbulk --version``` 

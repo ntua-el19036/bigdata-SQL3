@@ -48,22 +48,21 @@ def main():
     output_folder = os.path.join(parent_directory, 'json_data')
     os.makedirs(output_folder, exist_ok=True)
 
-    # for table in tables_dict:
-    table = tables_dict[14]
-    file_path = table['file_path']
-    output_filename = os.path.join(output_folder, table['table_name'] + 'test.json')
-    column_names = table['column_names']
+    for table in tables_dict:
+        file_path = table['file_path']
+        output_filename = os.path.join(output_folder, table['table_name'] + 'test.json')
+        column_names = table['column_names']
 
-    # Check if the output file exists, and if it does, clear its content
-    if os.path.exists(output_filename):
-        open(output_filename, 'w').close()
+        # Check if the output file exists, and if it does, clear its content
+        if os.path.exists(output_filename):
+            open(output_filename, 'w').close()
 
-    # Process the file in batches and write to the output file
-    process_file_in_batches(file_path, output_filename, column_names)
+        # Process the file in batches and write to the output file
+        process_file_in_batches(file_path, output_filename, column_names)
 
-    # Remove the initial file only if the --keep-source argument is not provided
-    if not args.keep_source:
-        os.remove(file_path)
+        # Remove the initial file only if the --keep-source argument is not provided
+        if not args.keep_source:
+            os.remove(file_path)
 
 if __name__ == "__main__":
     main()

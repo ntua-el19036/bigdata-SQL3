@@ -50,7 +50,7 @@ def main():
 
     for table in tables_dict:
         file_path = table['file_path']
-        output_filename = os.path.join(output_folder, table['table_name'] + 'test.json')
+        output_filename = os.path.join(output_folder, table['table_name'] + '.json')
         column_names = table['column_names']
 
         # Check if the output file exists, and if it does, clear its content

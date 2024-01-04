@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import json
 import os
-from config.tables_mongo import tables_dict
+from config.tables_redis_for_json import tables_dict
 
 def insert_into_Mongo(json_file, table_name, client):
     db = client['TPCDS']

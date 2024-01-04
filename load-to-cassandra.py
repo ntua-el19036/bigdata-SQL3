@@ -65,6 +65,6 @@ if __name__ == "__main__":
     session.execute("CREATE KEYSPACE IF NOT EXISTS bigdata WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': 1};")
     session.execute("USE bigdata;")
     
-    # create_tables(session)
+    create_tables(session)
     cluster.shutdown()
     insert_data()

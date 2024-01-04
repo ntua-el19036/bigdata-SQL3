@@ -4,7 +4,7 @@ from cassandra.cluster import Cluster
 from config.tables_cassandra import tables_dict
 
 def create_tables(session):
-    # Execute CQL script to create tables in Cassandra (in bigdata keyspace)
+    # Execute CQL script to create tables in Cassandra (in tpcds keyspace)
     cql_script = ""
 
     for table in tables_dict:
@@ -13,7 +13,7 @@ def create_tables(session):
         column_names = table['column_names']
         column_datatypes = table['column_datatypes']
 
-        cql_script += f"CREATE TABLE IF NOT EXISTS bigdata.{table_name} (\n"
+        cql_script += f"CREATE TABLE IF NOT EXISTS tpcds.{table_name} (\n"
         
         for i in range(len(column_names)):
             cql_script += f"    {column_names[i]} {column_datatypes[i]}"
@@ -60,10 +60,10 @@ def insert_data():
     print("All data have been inserted!")
     
 if __name__ == "__main__":
-    cluster = Cluster(['127.0.0.1'])  # Change the IP address if your Cassandra instance is on a different host
+    cluster = Cluster(['127.0.0.1'])  
     session = cluster.connect()
-    session.execute("CREATE KEYSPACE IF NOT EXISTS bigdata WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': 1};")
-    session.execute("USE bigdata;")
+    session.execute("CREATE KEYSPACE IF NOT EXISTS tpcds WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': 1};")
+    session.execute("USE tpcds;")
     
     create_tables(session)
     cluster.shutdown()

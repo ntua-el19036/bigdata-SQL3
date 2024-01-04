@@ -19,28 +19,28 @@ def write_to_file(data, filename, mode='a'):
             file.write('\n')
 
 def process_file_in_batches(file_path, output_filename, column_names, batch_size=10000):
-	sed_command = f"sed -i '1,{batch_size}d' {file_path}"
-	while True:
-		batch = []
-		with open(file_path, 'r') as file:
-        for line in file:
-            sql_data = parse_and_transform(line, column_names)
-            key_value_data = transform_sql_to_key_value(sql_data)
-            batch.append(key_value_data)
+    sed_command = f"sed -i '1,{batch_size}d' {file_path}"
+    while True:
+        batch = []
+        with open(file_path, 'r') as file:
+            for line in file:
+                sql_data = parse_and_transform(line, column_names)
+                key_value_data = transform_sql_to_key_value(sql_data)
+                batch.append(key_value_data)
 
-            # Write to the file in batches
-            if len(batch) == batch_size:
+                # Write to the file in batches
+                if len(batch) == batch_size:
+                    write_to_file(batch, output_filename, mode='a')
+                    batch = []
+                    result = subprocess.run(sed_command, shell=True)
+                    result.check_returncode()
+
+            # Write the remaining data in the last batch
+            if batch:
                 write_to_file(batch, output_filename, mode='a')
-                batch = []
-				result = subprocess.run(sed_command, shell=true)
-				result.check_returncode()
-
-        # Write the remaining data in the last batch
-        if batch:
-            write_to_file(batch, output_filename, mode='a')
-			result = subprocess.run(sed_command, shell=true)
-			result.check_returncode()
-			break
+                result = subprocess.run(sed_command, shell=True)
+                result.check_returncode()
+                break
 
 def main():
     parser = argparse.ArgumentParser(description='Process .dat files and create JSON files.')

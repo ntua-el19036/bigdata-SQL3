@@ -1,4 +1,7 @@
 # SQL3
+master - Redis
+worker2 - Mongo
+worker3 - Cassandra
 <details>
 <summary><h2>Installation</h2></summary>
 Prerequisites:

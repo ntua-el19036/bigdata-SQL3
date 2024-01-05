@@ -18,9 +18,11 @@ def write_to_file(data, filename, mode='a'):
             json.dump(line, file)
             file.write('\n')
 
-def process_file_in_batches(file_path, output_filename, column_names, batch_size=10000):
+def process_file_in_batches(file_path, output_filename, column_names, batch_size=1000000):
     sed_command = f"sed -i '1,{batch_size}d' {file_path}"
+    flag = False
     while True:
+        flag = False
         batch = []
         with open(file_path, 'r') as file:
             for line in file:
@@ -32,14 +34,18 @@ def process_file_in_batches(file_path, output_filename, column_names, batch_size
                 if len(batch) == batch_size:
                     write_to_file(batch, output_filename, mode='a')
                     batch = []
+                    flag = True
                     result = subprocess.run(sed_command, shell=True)
                     result.check_returncode()
+                    print(f"Wrote {batch_size} lines to {output_filename}")
 
             # Write the remaining data in the last batch
             if batch:
                 write_to_file(batch, output_filename, mode='a')
                 result = subprocess.run(sed_command, shell=True)
                 result.check_returncode()
+                break
+            if flag == False:
                 break
 
 def main():

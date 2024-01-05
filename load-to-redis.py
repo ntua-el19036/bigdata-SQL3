@@ -3,7 +3,7 @@ import os
 import redis
 from config.tables_redis_for_json import tables_dict
 
-def insert_into_redis(json_file, table_name, has_pk, has_date, redis_client, primary_key):
+def insert_into_redis(json_file, table_name, has_pk, has_date, redis_client, primary_key, datatypes):
     schema_name = 'tpcds'
     table_prefix = f"{schema_name}:{table_name}:"
     with open(json_file, 'r') as file:
@@ -12,9 +12,11 @@ def insert_into_redis(json_file, table_name, has_pk, has_date, redis_client, pri
             if(has_date or not has_pk):
                 # Constructing the Redis key with schema name (tpcds), table name, and a row counter
                 row_key = table_prefix + f"{line_num}"
+                cleaned_data = {key: value for index, (key, value) in enumerate(data.items()) if (value != '' or datatypes[index].startswith('VARCHAR'))}
+
 
                 # Convert the entire data to a JSON string
-                json_data = json.dumps(data)
+                json_data = json.dumps(cleaned_data)
 
                 # Use set to store the JSON string as the value for the key
                 redis_client.set(row_key, json_data)
@@ -42,7 +44,7 @@ def main():
         has_pk = (table['primary_key'] != '')
         json_file = os.path.join(json_data_folder, f"{table_name}.json")
         if os.path.exists(json_file):
-            insert_into_redis(json_file, table_name, has_pk, has_date, redis_client, table['primary_key'])
+            insert_into_redis(json_file, table_name, has_pk, has_date, redis_client, table['primary_key'], table['column_datatypes'])
             print(f"Data for table '{table_name}' inserted into Redis.")
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@ import json
 import os
 import argparse
 import subprocess
+from tqdm import tqdm
 from config.tables_redis_for_json import tables_dict
 
 def parse_and_transform(line, column_names):
@@ -18,28 +19,42 @@ def write_to_file(data, filename, mode='a'):
             json.dump(line, file)
             file.write('\n')
 
-def process_file_in_batches(file_path, output_filename, column_names, batch_size=10000):
-    sed_command = f"sed -i '1,{batch_size}d' {file_path}"
-    while True:
-        batch = []
-        with open(file_path, 'r') as file:
-            for line in file:
-                sql_data = parse_and_transform(line, column_names)
-                key_value_data = transform_sql_to_key_value(sql_data)
-                batch.append(key_value_data)
+def get_total_lines(file_path):
+    with open(file_path, 'r') as file:
+        total_lines = sum(1 for line in file)
+    return total_lines
 
-                # Write to the file in batches
-                if len(batch) == batch_size:
-                    write_to_file(batch, output_filename, mode='a')
-                    batch = []
-                    result = subprocess.run(sed_command, shell=True)
-                    result.check_returncode()
+def process_file_in_batches(file_path, output_folder, column_names, table_name, batch_size=1000000):
+    sed_command = f"sed -i '1,{batch_size}d' {file_path}"
+    output_filename = os.path.join(output_folder, f'{table_name}_all_batches.json')
+    total_lines = get_total_lines(file_path)
+    # Use tqdm for progress bar
+    with tqdm(total=total_lines, desc=f"Processing {table_name}", unit="line") as pbar:
+        flag = False
+        while True:
+            flag = False
+            batch = []
+            with open(file_path, 'r') as file:
+                for line in file:
+                    sql_data = parse_and_transform(line, column_names)
+                    key_value_data = transform_sql_to_key_value(sql_data)
+                    batch.append(key_value_data)
+                    pbar.update(1)
+
+                    # Write to the same output file for each batch
+                    if len(batch) == batch_size:
+                        write_to_file(batch, output_filename, mode='a')
+                        flag = True
+                        result = subprocess.run(sed_command, shell=True)
+                        result.check_returncode()
 
             # Write the remaining data in the last batch
             if batch:
                 write_to_file(batch, output_filename, mode='a')
                 result = subprocess.run(sed_command, shell=True)
                 result.check_returncode()
+                break
+            if flag == False:
                 break
 
 def main():
@@ -60,23 +75,43 @@ def main():
     os.makedirs(data_folder, exist_ok=True)
 
     for table in tables_dict:
-        gen_data_command = f"cd ../tpcds-kit/tools && ./dsdgen -SCALE 10 -DIR ../../data -RNGSEED 1 -TABLE {table['table_name']} && cd -"
-        process = subprocess.run(gen_data_command, shell=True)
-        process.check_returncode()
+        table_name = table['table_name']
+        batch_size = table['batch_size']
+        if (table_name not in ['web_sales','web_returns','store_sales','store_returns','catalog_sales','catalog_returns','inventory']):
+            gen_data_command = f"cd ../tpcds-kit/tools && ./dsdgen -SCALE 10 -DIR ../../data -RNGSEED 1 -TABLE {table_name} && cd -"
+            process = subprocess.run(gen_data_command, shell=True)
+            process.check_returncode()
 
-        file_path = os.path.join(data_folder, table['table_name'] + '.dat')
-        output_filename = os.path.join(output_folder, table['table_name'] + '.json')
-        column_names = table['column_names']
+            file_path = os.path.join(data_folder, table_name + '.dat')
+            column_names = table['column_names']
 
-        # Check if the output file exists, and if it does, clear its content
-        if os.path.exists(output_filename):
-            open(output_filename, 'w').close()
+            # Process the file in batches and write to the same output file
+            process_file_in_batches(file_path, output_folder, column_names, table_name, batch_size)
 
-        # Process the file in batches and write to the output file
-        process_file_in_batches(file_path, output_filename, column_names)
+            if table_name == 'catalog_sales':
+                table = tables_dict['catalog_returns']
+                table_name = table['table_name']
+                batch_size = table['batch_size']
+                file_path = os.path.join(data_folder, table_name + '.dat')
+                column_names = table['column_names']
+                process_file_in_batches(file_path, output_folder, column_names, table_name, batch_size)
+            elif table_name == 'web_sales':
+                table = tables_dict['web_returns']
+                table_name = table['table_name']
+                batch_size = table['batch_size']
+                file_path = os.path.join(data_folder, table_name + '.dat')
+                column_names = table['column_names']
+                process_file_in_batches(file_path, output_folder, column_names, table_name, batch_size)
+            elif table_name == 'store_sales':
+                table = tables_dict[20]  # store returns
+                table_name = tables_dict['store_returns']
+                batch_size = table['batch_size']
+                file_path = os.path.join(data_folder, table_name + '.dat')
+                column_names = table['column_names']
+                process_file_in_batches(file_path, output_folder, column_names, table_name, batch_size)
 
         # Remove the initial file only if the --keep-source argument is not provided
-        if not args.keep_source:
+        if (os.path.exists(file_path) and not args.keep_source):
             os.remove(file_path)
 
 if __name__ == "__main__":

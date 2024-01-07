@@ -26,7 +26,7 @@ def get_total_lines(file_path):
 
 def process_file_in_batches(file_path, output_folder, column_names, table_name, batch_size=1000000):
     sed_command = f"sed -i '1,{batch_size}d' {file_path}"
-    output_filename = os.path.join(output_folder, f'{table_name}_all_batches.json')
+    counter = 1
     total_lines = get_total_lines(file_path)
     # Use tqdm for progress bar
     with tqdm(total=total_lines, desc=f"Processing {table_name}", unit="line") as pbar:
@@ -43,14 +43,18 @@ def process_file_in_batches(file_path, output_folder, column_names, table_name, 
 
                     # Write to the same output file for each batch
                     if len(batch) == batch_size:
-                        write_to_file(batch, output_filename, mode='a')
+                        output_filename = os.path.join(output_folder, f'{table_name}{counter}.json')
+                        write_to_file(batch, output_filename, mode='w')
+                        counter += 1
+                        batch = []
                         flag = True
                         result = subprocess.run(sed_command, shell=True)
                         result.check_returncode()
 
             # Write the remaining data in the last batch
             if batch:
-                write_to_file(batch, output_filename, mode='a')
+                output_filename = os.path.join(output_folder, f'{table_name}{counter}.json')
+                write_to_file(batch, output_filename, mode='w')
                 result = subprocess.run(sed_command, shell=True)
                 result.check_returncode()
                 break
@@ -77,8 +81,8 @@ def main():
     for table in tables_dict:
         table_name = table['table_name']
         batch_size = table['batch_size']
-        if (table_name not in ['web_sales','web_returns','store_sales','store_returns','catalog_sales','catalog_returns','inventory']):
-            gen_data_command = f"cd ../tpcds-kit/tools && ./dsdgen -SCALE 10 -DIR ../../data -RNGSEED 1 -TABLE {table_name} && cd -"
+        if (table_name == 'store_sales'):
+            gen_data_command = f"cd ../tpcds-kit/tools && ./dsdgen -SCALE 1 -DIR ../../data -RNGSEED 1 -TABLE {table_name} && cd -"
             process = subprocess.run(gen_data_command, shell=True)
             process.check_returncode()
 
@@ -89,14 +93,14 @@ def main():
             process_file_in_batches(file_path, output_folder, column_names, table_name, batch_size)
 
             if table_name == 'catalog_sales':
-                table = tables_dict['catalog_returns']
+                table = tables_dict[24]
                 table_name = table['table_name']
                 batch_size = table['batch_size']
                 file_path = os.path.join(data_folder, table_name + '.dat')
                 column_names = table['column_names']
                 process_file_in_batches(file_path, output_folder, column_names, table_name, batch_size)
             elif table_name == 'web_sales':
-                table = tables_dict['web_returns']
+                table = tables_dict[22]
                 table_name = table['table_name']
                 batch_size = table['batch_size']
                 file_path = os.path.join(data_folder, table_name + '.dat')
@@ -104,15 +108,15 @@ def main():
                 process_file_in_batches(file_path, output_folder, column_names, table_name, batch_size)
             elif table_name == 'store_sales':
                 table = tables_dict[20]  # store returns
-                table_name = tables_dict['store_returns']
+                table_name = table['table_name']
                 batch_size = table['batch_size']
                 file_path = os.path.join(data_folder, table_name + '.dat')
                 column_names = table['column_names']
                 process_file_in_batches(file_path, output_folder, column_names, table_name, batch_size)
 
-        # Remove the initial file only if the --keep-source argument is not provided
-        if (os.path.exists(file_path) and not args.keep_source):
-            os.remove(file_path)
+            # Remove the initial file only if the --keep-source argument is not provided
+            if (os.path.exists(file_path) and not args.keep_source):
+                os.remove(file_path)
 
 if __name__ == "__main__":
     main()

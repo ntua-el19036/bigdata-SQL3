@@ -171,7 +171,7 @@ tables_dict = [
                          'p_channel_details','p_purpose','p_discount_active'],
         'column_datatypes': [
             'INTEGER', 'VARCHAR(16)', 'INTEGER', 'INTEGER', 'INTEGER', 'DOUBLE', 'INTEGER',
-            'VARCHAR(50)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)',
+            'VARCHAR(50)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)', 'VARCHAR(1)',
             'VARCHAR(100)', 'VARCHAR(15)', 'VARCHAR(1)'
             ]
     },

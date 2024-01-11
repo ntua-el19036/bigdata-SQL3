@@ -10,9 +10,6 @@ def parse_and_transform(line, column_names):
     values_dict = {column_names[i]: columns[i] for i in range(0, len(columns)-1)}
     return values_dict
 
-def transform_sql_to_key_value(sql_data):
-    return sql_data
-
 def write_to_file(data, filename, mode='a'):
     with open(filename, mode) as file:
         for line in data:
@@ -36,8 +33,7 @@ def process_file_in_batches(file_path, output_folder, column_names, table_name, 
             batch = []
             with open(file_path, 'r') as file:
                 for line in file:
-                    sql_data = parse_and_transform(line, column_names)
-                    key_value_data = transform_sql_to_key_value(sql_data)
+                    key_value_data = parse_and_transform(line, column_names)
                     batch.append(key_value_data)
                     pbar.update(1)
 
@@ -81,8 +77,8 @@ def main():
     for table in tables_dict:
         table_name = table['table_name']
         batch_size = table['batch_size']
-        if (table_name == 'store_sales'):
-            gen_data_command = f"cd ../tpcds-kit/tools && ./dsdgen -SCALE 1 -DIR ../../data -RNGSEED 1 -TABLE {table_name} && cd -"
+        if (table_name == 'store'):
+            gen_data_command = f"cd ../tpcds-kit/tools && ./dsdgen -SCALE 10 -DIR ../../data -RNGSEED 1 -TABLE {table_name} && cd -"
             process = subprocess.run(gen_data_command, shell=True)
             process.check_returncode()
 

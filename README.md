@@ -1,7 +1,4 @@
 # SQL3
-master - Redis
-worker2 - Mongo
-worker3 - Cassandra
 <details>
 <summary><h2>Installation</h2></summary>
 Prerequisites:
@@ -82,4 +79,5 @@ The raw data from .dat files are parsed and converted to .csv to be loaded to Ca
 We used dsbulk to load csv files to Cassanda. The steps to install it are:
 1. Download the binary tarball from the DSBulk Loader's Github repo: https://github.com/datastax/dsbulk/releases/tag/1.11.0
 2. Unpack the downloaded distribution
-3. Verify the dsbulk version with the command : ```dsbulk --version``` 
+3. Add the `bin` directory of the DSBulk distribution into the `PATH` by adding ```export PATH=/home/user/dsbulk-1.11.0/bin:$PATH``` to the ~/.bashrc file and executing the updated file with the command: ```source ~/.bashrc```
+4. Verify the dsbulk version with the command : ```dsbulk --version``` 

@@ -14,7 +14,7 @@ def create_tables(session):
         column_datatypes = table['column_datatypes']
 
         cql_script += f"CREATE TABLE IF NOT EXISTS tpcds.{table_name} (\n"
-        
+
         for i in range(len(column_names)):
             cql_script += f"    {column_names[i]} {column_datatypes[i]}"
             cql_script += ",\n"
@@ -50,21 +50,21 @@ def insert_data():
     # Insert data into Cassandra tables using dsbulk commands
     script_dir = os.path.dirname(os.path.abspath(__file__))
     data_dir = os.path.join(script_dir, 'csv-data')
-    
+
     for table in tables_dict:
         table_name = table['table_name']
         file_path = os.path.join(data_dir, table_name + '.csv')
-        command = f"dsbulk load -url {file_path} -k bigdata -t {table_name}"
+        command = f"dsbulk load -url {file_path} -k tpcds -t {table_name}"
         print(command)
         execute_command(command)
     print("All data have been inserted!")
-    
+
 if __name__ == "__main__":
-    cluster = Cluster(['127.0.0.1'])  
+    cluster = Cluster(['127.0.0.1'])
     session = cluster.connect()
     session.execute("CREATE KEYSPACE IF NOT EXISTS tpcds WITH REPLICATION = {'class': 'SimpleStrategy', 'replication_factor': 1};")
     session.execute("USE tpcds;")
-    
+
     create_tables(session)
     cluster.shutdown()
     insert_data()

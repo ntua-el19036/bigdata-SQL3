@@ -14,7 +14,7 @@ for table in tables_dict:
     output_file_path = os.path.join(output_dir, f"{table['table_name']}.csv")
 
     # Read .dat file in increments of 10,000 rows
-    nrows = 10000  # Adjust the number of rows as needed
+    nrows = 1000000  # Adjust the number of rows as needed
 
     sed_command = f"sed -i '1,{nrows}d' {file_path}"
 
@@ -31,7 +31,7 @@ for table in tables_dict:
 
             # Convert "|" delimiters to commas and remove the last "|" on each line
             chunk.to_csv(csv_file, sep=',', index=False, header=False, lineterminator='\n', mode='a')
-    
+
             result = subprocess.run(sed_command, shell=True)
             if result.returncode == 0:
                 print("sed command executed successfully")
@@ -41,4 +41,3 @@ for table in tables_dict:
 
     print(f"Table {table['table_name']} completed")
 print("Conversion completed.")
-

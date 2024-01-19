@@ -1,0 +1,24 @@
+{
+    "tableName": "income_band",
+    "schemaName": "tpcds",
+    "value": {
+        "dataFormat": "hash",
+        "fields": [
+            {
+                "name": "ib_income_band_sk",
+                "type": "INTEGER",
+                "mapping": "ib_income_band_sk"
+            },
+            {
+                "name": "ib_lower_bound",
+                "type": "INTEGER",
+                "mapping": "ib_lower_bound"
+            },
+            {
+                "name": "ib_upper_bound",
+                "type": "INTEGER",
+                "mapping": "ib_upper_bound"
+            }
+        ]
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "tableName": "catalog_page",
+    "schemaName": "tpcds",
+    "value": {
+        "dataFormat": "hash",
+        "fields": [
+            {
+                "name": "cp_catalog_page_sk",
+                "type": "INTEGER",
+                "mapping": "cp_catalog_page_sk"
+            },
+            {
+                "name": "cp_catalog_page_id",
+                "type": "VARCHAR(16)",
+                "mapping": "cp_catalog_page_id"
+            },
+            {
+                "name": "cp_start_date_sk",
+                "type": "INTEGER",
+                "mapping": "cp_start_date_sk"
+            },
+            {
+                "name": "cp_end_date_sk",
+                "type": "INTEGER",
+                "mapping": "cp_end_date_sk"
+            },
+            {
+                "name": "cp_department",
+                "type": "VARCHAR(50)",
+                "mapping": "cp_department"
+            },
+            {
+                "name": "cp_catalog_number",
+                "type": "INTEGER",
+                "mapping": "cp_catalog_number"
+            },
+            {
+                "name": "cp_catalog_page_number",
+                "type": "INTEGER",
+                "mapping": "cp_catalog_page_number"
+            },
+            {
+                "name": "cp_description",
+                "type": "VARCHAR(100)",
+                "mapping": "cp_description"
+            },
+            {
+                "name": "cp_type",
+                "type": "VARCHAR(100)",
+                "mapping": "cp_type"
+            }
+        ]
+    }
+}

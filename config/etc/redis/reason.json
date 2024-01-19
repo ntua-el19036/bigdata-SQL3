@@ -1,0 +1,24 @@
+{
+    "tableName": "reason",
+    "schemaName": "tpcds",
+    "value": {
+        "dataFormat": "hash",
+        "fields": [
+            {
+                "name": "r_reason_sk",
+                "type": "INTEGER",
+                "mapping": "r_reason_sk"
+            },
+            {
+                "name": "r_reason_id",
+                "type": "VARCHAR(16)",
+                "mapping": "r_reason_id"
+            },
+            {
+                "name": "r_reason_desc",
+                "type": "VARCHAR(100)",
+                "mapping": "r_reason_desc"
+            }
+        ]
+    }
+}

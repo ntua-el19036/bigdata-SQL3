@@ -1,0 +1,133 @@
+{
+    "tableName": "item",
+    "schemaName": "tpcds",
+    "key": {
+        "dataFormat": "raw",
+        "fields": [
+            {
+                "name": "redis_key",
+                "type": "VARCHAR(64)",
+                "hidden": "true"
+            }
+        ]
+    },
+    "value": {
+        "dataFormat": "json",
+        "fields": [
+            {
+                "name": "i_item_sk",
+                "type": "INTEGER",
+                "mapping": "i_item_sk"
+            },
+            {
+                "name": "i_item_id",
+                "type": "VARCHAR(16)",
+                "mapping": "i_item_id"
+            },
+            {
+                "name": "i_rec_start_date",
+                "type": "DATE",
+                "mapping": "i_rec_start_date",
+                "dataFormat": "custom-date-time",
+                "formatHint": "YYYY-MM-DD"
+            },
+            {
+                "name": "i_rec_end_date",
+                "type": "DATE",
+                "mapping": "i_rec_end_date",
+                "dataFormat": "custom-date-time",
+                "formatHint": "YYYY-MM-DD"
+            },
+            {
+                "name": "i_item_desc",
+                "type": "VARCHAR(200)",
+                "mapping": "i_item_desc"
+            },
+            {
+                "name": "i_current_price",
+                "type": "DOUBLE",
+                "mapping": "i_current_price"
+            },
+            {
+                "name": "i_wholesale_cost",
+                "type": "DOUBLE",
+                "mapping": "i_wholesale_cost"
+            },
+            {
+                "name": "i_brand_id",
+                "type": "INTEGER",
+                "mapping": "i_brand_id"
+            },
+            {
+                "name": "i_brand",
+                "type": "VARCHAR(50)",
+                "mapping": "i_brand"
+            },
+            {
+                "name": "i_class_id",
+                "type": "INTEGER",
+                "mapping": "i_class_id"
+            },
+            {
+                "name": "i_class",
+                "type": "VARCHAR(50)",
+                "mapping": "i_class"
+            },
+            {
+                "name": "i_category_id",
+                "type": "INTEGER",
+                "mapping": "i_category_id"
+            },
+            {
+                "name": "i_category",
+                "type": "VARCHAR(50)",
+                "mapping": "i_category"
+            },
+            {
+                "name": "i_manufact_id",
+                "type": "INTEGER",
+                "mapping": "i_manufact_id"
+            },
+            {
+                "name": "i_manufact",
+                "type": "VARCHAR(50)",
+                "mapping": "i_manufact"
+            },
+            {
+                "name": "i_size",
+                "type": "VARCHAR(20)",
+                "mapping": "i_size"
+            },
+            {
+                "name": "i_formulation",
+                "type": "VARCHAR(20)",
+                "mapping": "i_formulation"
+            },
+            {
+                "name": "i_color",
+                "type": "VARCHAR(20)",
+                "mapping": "i_color"
+            },
+            {
+                "name": "i_units",
+                "type": "VARCHAR(10)",
+                "mapping": "i_units"
+            },
+            {
+                "name": "i_container",
+                "type": "VARCHAR(10)",
+                "mapping": "i_container"
+            },
+            {
+                "name": "i_manager_id",
+                "type": "INTEGER",
+                "mapping": "i_manager_id"
+            },
+            {
+                "name": "i_product_name",
+                "type": "VARCHAR(50)",
+                "mapping": "i_product_name"
+            }
+        ]
+    }
+}

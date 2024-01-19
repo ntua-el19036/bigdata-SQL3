@@ -1,0 +1,93 @@
+{
+    "tableName": "web_page",
+    "schemaName": "tpcds",
+    "key": {
+        "dataFormat": "raw",
+        "fields": [
+            {
+                "name": "redis_key",
+                "type": "VARCHAR(64)",
+                "hidden": "true"
+            }
+        ]
+    },
+    "value": {
+        "dataFormat": "json",
+        "fields": [
+            {
+                "name": "wp_web_page_sk",
+                "type": "INTEGER",
+                "mapping": "wp_web_page_sk"
+            },
+            {
+                "name": "wp_web_page_id",
+                "type": "VARCHAR(16)",
+                "mapping": "wp_web_page_id"
+            },
+            {
+                "name": "wp_rec_start_date",
+                "type": "DATE",
+                "mapping": "wp_rec_start_date",
+                "dataFormat": "custom-date-time",
+                "formatHint": "YYYY-MM-DD"
+            },
+            {
+                "name": "wp_rec_end_date",
+                "type": "DATE",
+                "mapping": "wp_rec_end_date",
+                "dataFormat": "custom-date-time",
+                "formatHint": "YYYY-MM-DD"
+            },
+            {
+                "name": "wp_creation_date_sk",
+                "type": "INTEGER",
+                "mapping": "wp_creation_date_sk"
+            },
+            {
+                "name": "wp_access_date_sk",
+                "type": "INTEGER",
+                "mapping": "wp_access_date_sk"
+            },
+            {
+                "name": "wp_autogen_flag",
+                "type": "VARCHAR(1)",
+                "mapping": "wp_autogen_flag"
+            },
+            {
+                "name": "wp_customer_sk",
+                "type": "INTEGER",
+                "mapping": "wp_customer_sk"
+            },
+            {
+                "name": "wp_url",
+                "type": "VARCHAR(100)",
+                "mapping": "wp_url"
+            },
+            {
+                "name": "wp_type",
+                "type": "VARCHAR(50)",
+                "mapping": "wp_type"
+            },
+            {
+                "name": "wp_char_count",
+                "type": "INTEGER",
+                "mapping": "wp_char_count"
+            },
+            {
+                "name": "wp_link_count",
+                "type": "INTEGER",
+                "mapping": "wp_link_count"
+            },
+            {
+                "name": "wp_image_count",
+                "type": "INTEGER",
+                "mapping": "wp_image_count"
+            },
+            {
+                "name": "wp_max_ad_count",
+                "type": "INTEGER",
+                "mapping": "wp_max_ad_count"
+            }
+        ]
+    }
+}

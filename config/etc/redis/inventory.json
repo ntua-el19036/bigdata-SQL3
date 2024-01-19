@@ -1,0 +1,39 @@
+{
+    "tableName": "inventory",
+    "schemaName": "tpcds",
+    "key": {
+        "dataFormat": "raw",
+        "fields": [
+            {
+                "name": "redis_key",
+                "type": "VARCHAR(64)",
+                "hidden": "true"
+            }
+        ]
+    },
+    "value": {
+        "dataFormat": "json",
+        "fields": [
+            {
+                "name": "inv_date_sk",
+                "type": "INTEGER",
+                "mapping": "inv_date_sk"
+            },
+            {
+                "name": "inv_item_sk",
+                "type": "INTEGER",
+                "mapping": "inv_item_sk"
+            },
+            {
+                "name": "inv_warehouse_sk",
+                "type": "INTEGER",
+                "mapping": "inv_warehouse_sk"
+            },
+            {
+                "name": "inv_quantity_on_hand",
+                "type": "INTEGER",
+                "mapping": "inv_quantity_on_hand"
+            }
+        ]
+    }
+}

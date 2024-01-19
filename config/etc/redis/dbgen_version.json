@@ -1,0 +1,41 @@
+{
+    "tableName": "dbgen_version",
+    "schemaName": "tpcds",
+    "key": {
+        "dataFormat": "raw",
+        "fields": [
+            {
+                "name": "redis_key",
+                "type": "VARCHAR(64)",
+                "hidden": "true"
+            }
+        ]
+    },
+    "value": {
+        "dataFormat": "json",
+        "fields": [
+            {
+                "name": "dv_version",
+                "type": "VARCHAR(16)",
+                "mapping": "dv_version"
+            },
+            {
+                "name": "dv_create_date",
+                "type": "DATE",
+                "mapping": "dv_create_date",
+                "dataFormat": "custom-date-time",
+                "formatHint": "YYYY-MM-DD"
+            },
+            {
+                "name": "dv_create_time",
+                "type": "TIME",
+                "mapping": "dv_create_time"
+            },
+            {
+                "name": "dv_cmdline_args",
+                "type": "VARCHAR(200)",
+                "mapping": "dv_cmdline_args"
+            }
+        ]
+    }
+}

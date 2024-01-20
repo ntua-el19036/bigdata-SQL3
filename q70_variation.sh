@@ -9,10 +9,10 @@ fi
 new_filename="query_70_$1.sql"
 
 # Use sed to replace the table prefixes in the original query and save it to the new file
-sed_args="12 s/store_sales/$2.store_sales/g;"
-sed_args+="13 s/date_dim/$3.date_dim/g;"
-sed_args+="14 s/store/$4.store/g;"
-sed_args+="23 s/store_sales, store, date_dim/$2.store_sales, $3.store, $4.date_dim/g;"
+sed_args="12 s/store_sales/$2.tpcds.store_sales/g;"
+sed_args+="13 s/date_dim/$3.tpcds.date_dim/g;"
+sed_args+="14 s/store/$4.tpcds.store/g;"
+sed_args+="23 s/store_sales, store, date_dim/$2.tpcds.store_sales, $3.tpcds.store, $4.tpcds.date_dim/g;"
 
 sed "$sed_args" query_70.sql > "${new_filename}"
 

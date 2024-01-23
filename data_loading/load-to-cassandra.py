@@ -49,7 +49,8 @@ def execute_command(command):
 def insert_data():
     # Insert data into Cassandra tables using dsbulk commands
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    data_dir = os.path.join(script_dir, 'csv-data')
+    parent_dir = os.path.dirname(script_dir)
+    data_dir = os.path.join(parent_dir, 'csv-data')
 
     for table in tables_dict:
         table_name = table['table_name']

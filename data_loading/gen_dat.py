@@ -6,6 +6,7 @@ if __name__ == "__main__":
     # Get the directory of the script
     script_directory = os.path.dirname(os.path.abspath(__file__))
     parent_directory = os.path.dirname(script_directory)
+    parent_directory = os.path.dirname(parent_directory)
 
     data_folder = os.path.join(parent_directory, 'data')
     os.makedirs(data_folder, exist_ok=True)

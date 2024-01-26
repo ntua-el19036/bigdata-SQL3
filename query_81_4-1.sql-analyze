@@ -1,0 +1,453 @@
+"Trino version: 435
+Queued: 20.53ms, Analysis: 2.77s, Planning: 537.47ms, Execution: 1.18m
+Fragment 1 [SINGLE]
+    CPU: 19.95ms, Scheduled: 30.58ms, Blocked 5.01m (Input: 4.01m, Output: 0.00ns), Input: 815 rows (156.42kB); per task: avg.: 815.00 std.dev.: 0.00, Output: 100 rows (19.22kB)
+    Output layout: [ca_street_number_9, c_salutation, ca_gmt_offset_5, ca_street_name_8, ca_street_type_10, ca_zip_12, ca_suite_number_11, sum, c_first_name, ca_country_3, ca_location_type_6, c_last_name, ca_state_7, c_customer_id, ca_city_2, ca_county_4]
+    Output partitioning: SINGLE []
+    TopN[count = 100, orderBy = [c_customer_id ASC NULLS LAST, c_salutation ASC NULLS LAST, c_first_name ASC NULLS LAST, c_last_name ASC NULLS LAST, ca_street_number_9 ASC NULLS LAST, ca_street_name_8 ASC NULLS LAST, ca_street_type_10 ASC NULLS LAST, ca_suite_number_11 ASC NULLS LAST, ca_city_2 ASC NULLS LAST, ca_county_4 ASC NULLS LAST, ca_state_7 ASC NULLS LAST, ca_zip_12 ASC NULLS LAST, ca_country_3 ASC NULLS LAST, ca_gmt_offset_5 ASC NULLS LAST, ca_location_type_6 ASC NULLS LAST, sum ASC NULLS LAST]]
+    │   Layout: [ca_street_number_9:varchar, c_salutation:varchar(10), ca_gmt_offset_5:double, ca_street_name_8:varchar, ca_street_type_10:varchar, ca_zip_12:varchar, ca_suite_number_11:varchar, sum:double, c_first_name:varchar(20), ca_country_3:varchar, ca_location_type_6:varchar, c_last_name:varchar(30), ca_state_7:varchar, c_customer_id:varchar(16), ca_city_2:varchar, ca_county_4:varchar]
+    │   Estimates: {rows: 100 (76.95kB), cpu: ?, memory: ?, network: ?}
+    │   CPU: 15.00ms (0.08%), Scheduled: 25.00ms (0.00%), Blocked: 0.00ns (0.00%), Output: 100 rows (19.22kB)
+    │   Input avg.: 815.00 rows, Input std.dev.: 0.00%
+    └─ LocalExchange[partitioning = SINGLE]
+       │   Layout: [ca_street_number_9:varchar, c_salutation:varchar(10), ca_gmt_offset_5:double, ca_street_name_8:varchar, ca_street_type_10:varchar, ca_zip_12:varchar, ca_suite_number_11:varchar, sum:double, c_first_name:varchar(20), ca_country_3:varchar, ca_location_type_6:varchar, c_last_name:varchar(30), ca_state_7:varchar, c_customer_id:varchar(16), ca_city_2:varchar, ca_county_4:varchar]
+       │   Estimates: {rows: ? (?), cpu: 0, memory: 0B, network: 0B}
+       │   CPU: 1.00ms (0.01%), Scheduled: 1.00ms (0.00%), Blocked: 1.00m (0.45%), Output: 815 rows (156.42kB)
+       │   Input avg.: 203.75 rows, Input std.dev.: 47.38%
+       └─ RemoteSource[sourceFragmentIds = [2]]
+              Layout: [ca_street_number_9:varchar, c_salutation:varchar(10), ca_gmt_offset_5:double, ca_street_name_8:varchar, ca_street_type_10:varchar, ca_zip_12:varchar, ca_suite_number_11:varchar, sum:double, c_first_name:varchar(20), ca_country_3:varchar, ca_location_type_6:varchar, c_last_name:varchar(30), ca_state_7:varchar, c_customer_id:varchar(16), ca_city_2:varchar, ca_county_4:varchar]
+              CPU: 2.00ms (0.01%), Scheduled: 2.00ms (0.00%), Blocked: 4.01m (1.82%), Output: 815 rows (156.42kB)
+              Input avg.: 203.75 rows, Input std.dev.: 47.38%
+
+Fragment 2 [HASH]
+    CPU: 250.69ms, Scheduled: 763.41ms, Blocked 35.71m (Input: 21.81m, Output: 0.00ns), Input: 4371 rows (777.81kB); per task: avg.: 1457.00 std.dev.: 111.43, Output: 815 rows (156.42kB)
+    Output layout: [ca_street_number_9, c_salutation, ca_gmt_offset_5, ca_street_name_8, ca_street_type_10, ca_zip_12, ca_suite_number_11, sum, c_first_name, ca_country_3, ca_location_type_6, c_last_name, ca_state_7, c_customer_id, ca_city_2, ca_county_4]
+    Output partitioning: SINGLE []
+    TopNPartial[count = 100, orderBy = [c_customer_id ASC NULLS LAST, c_salutation ASC NULLS LAST, c_first_name ASC NULLS LAST, c_last_name ASC NULLS LAST, ca_street_number_9 ASC NULLS LAST, ca_street_name_8 ASC NULLS LAST, ca_street_type_10 ASC NULLS LAST, ca_suite_number_11 ASC NULLS LAST, ca_city_2 ASC NULLS LAST, ca_county_4 ASC NULLS LAST, ca_state_7 ASC NULLS LAST, ca_zip_12 ASC NULLS LAST, ca_country_3 ASC NULLS LAST, ca_gmt_offset_5 ASC NULLS LAST, ca_location_type_6 ASC NULLS LAST, sum ASC NULLS LAST]]
+    │   Layout: [ca_street_number_9:varchar, c_salutation:varchar(10), ca_gmt_offset_5:double, ca_street_name_8:varchar, ca_street_type_10:varchar, ca_zip_12:varchar, ca_suite_number_11:varchar, sum:double, c_first_name:varchar(20), ca_country_3:varchar, ca_location_type_6:varchar, c_last_name:varchar(30), ca_state_7:varchar, c_customer_id:varchar(16), ca_city_2:varchar, ca_county_4:varchar]
+    │   CPU: 81.00ms (0.43%), Scheduled: 293.00ms (0.03%), Blocked: 0.00ns (0.00%), Output: 815 rows (156.42kB)
+    │   Input avg.: 92.60 rows, Input std.dev.: 36.85%
+    └─ FilterProject[filterPredicate = (""sum"" > (COALESCE(""avg"", ""avg_88"") * 1.2E0))]
+       │   Layout: [ca_street_number_9:varchar, c_salutation:varchar(10), ca_gmt_offset_5:double, ca_street_name_8:varchar, ca_street_type_10:varchar, ca_zip_12:varchar, ca_suite_number_11:varchar, sum:double, c_first_name:varchar(20), ca_country_3:varchar, ca_location_type_6:varchar, c_last_name:varchar(30), ca_state_7:varchar, c_customer_id:varchar(16), ca_city_2:varchar, ca_county_4:varchar]
+       │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}/{rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+       │   CPU: 33.00ms (0.17%), Scheduled: 104.00ms (0.01%), Blocked: 0.00ns (0.00%), Output: 926 rows (177.70kB)
+       │   Input avg.: 384.80 rows, Input std.dev.: 40.74%
+       └─ CrossJoin[]
+          │   Layout: [sum:double, ca_city_2:varchar, ca_country_3:varchar, ca_county_4:varchar, ca_gmt_offset_5:double, ca_location_type_6:varchar, ca_state_7:varchar, ca_street_name_8:varchar, ca_street_number_9:varchar, ca_street_type_10:varchar, ca_suite_number_11:varchar, ca_zip_12:varchar, c_customer_id:varchar(16), c_salutation:varchar(10), c_first_name:varchar(20), c_last_name:varchar(30), avg:double, avg_88:double]
+          │   Estimates: {rows: ? (?), cpu: ?, memory: 27B, network: 0B}
+          │   CPU: 6.00ms (0.03%), Scheduled: 23.00ms (0.00%), Blocked: 2.81m (1.28%), Output: 3848 rows (772.60kB)
+          │   Distribution: REPLICATED
+          ├─ LeftJoin[criteria = (""ca_state"" = ""ca_state_75""), distribution = PARTITIONED]
+          │  │   Layout: [sum:double, c_customer_id:varchar(16), c_salutation:varchar(10), c_first_name:varchar(20), c_last_name:varchar(30), ca_city_2:varchar, ca_country_3:varchar, ca_county_4:varchar, ca_gmt_offset_5:double, ca_location_type_6:varchar, ca_state_7:varchar, ca_street_name_8:varchar, ca_street_number_9:varchar, ca_street_type_10:varchar, ca_suite_number_11:varchar, ca_zip_12:varchar, avg:double]
+          │  │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: 0B}
+          │  │   CPU: 71.00ms (0.37%), Scheduled: 240.00ms (0.03%), Blocked: 8.90s (0.07%), Output: 3848 rows (772.34kB)
+          │  │   Left (probe) Input avg.: 384.80 rows, Input std.dev.: 40.74%
+          │  │   Right (build) Input avg.: 5.20 rows, Input std.dev.: 61.30%
+          │  │   Distribution: PARTITIONED
+          │  ├─ RemoteSource[sourceFragmentIds = [3]]
+          │  │      Layout: [ca_state:varchar, sum:double, c_customer_id:varchar(16), c_salutation:varchar(10), c_first_name:varchar(20), c_last_name:varchar(30), ca_city_2:varchar, ca_country_3:varchar, ca_county_4:varchar, ca_gmt_offset_5:double, ca_location_type_6:varchar, ca_state_7:varchar, ca_street_name_8:varchar, ca_street_number_9:varchar, ca_street_type_10:varchar, ca_suite_number_11:varchar, ca_zip_12:varchar]
+          │  │      CPU: 3.00ms (0.02%), Scheduled: 5.00ms (0.00%), Blocked: 10.44m (4.75%), Output: 3848 rows (764.60kB)
+          │  │      Input avg.: 384.80 rows, Input std.dev.: 40.74%
+          │  └─ Aggregate[type = FINAL, keys = [ca_state_75]]
+          │     │   Layout: [ca_state_75:varchar, avg:double]
+          │     │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: 0B}
+          │     │   CPU: 26.00ms (0.14%), Scheduled: 59.00ms (0.01%), Blocked: 0.00ns (0.00%), Output: 52 rows (830B)
+          │     │   Input avg.: 52.00 rows, Input std.dev.: 61.30%
+          │     │   avg := avg(""avg_90"")
+          │     └─ LocalExchange[partitioning = HASH, arguments = [""ca_state_75""]]
+          │        │   Layout: [ca_state_75:varchar, avg_90:row(double, bigint)]
+          │        │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+          │        │   CPU: 9.00ms (0.05%), Scheduled: 13.00ms (0.00%), Blocked: 10.57m (4.81%), Output: 520 rows (13.18kB)
+          │        │   Input avg.: 52.00 rows, Input std.dev.: 75.39%
+          │        └─ RemoteSource[sourceFragmentIds = [13]]
+          │               Layout: [ca_state_75:varchar, avg_90:row(double, bigint)]
+          │               CPU: 7.00ms (0.04%), Scheduled: 7.00ms (0.00%), Blocked: 10.57m (4.81%), Output: 520 rows (13.18kB)
+          │               Input avg.: 52.00 rows, Input std.dev.: 75.39%
+          └─ LocalExchange[partitioning = SINGLE]
+             │   Layout: [avg_88:double]
+             │   Estimates: {rows: 1 (9B), cpu: 0, memory: 0B, network: 0B}
+             │   CPU: 0.00ns (0.00%), Scheduled: 0.00ns (0.00%), Blocked: 17.18s (0.13%), Output: 3 rows (27B)
+             │   Input avg.: 0.30 rows, Input std.dev.: 152.75%
+             └─ RemoteSource[sourceFragmentIds = [19]]
+                    Layout: [avg_88:double]
+                    CPU: 0.00ns (0.00%), Scheduled: 0.00ns (0.00%), Blocked: 48.24s (0.37%), Output: 3 rows (27B)
+                    Input avg.: 0.30 rows, Input std.dev.: 152.75%
+
+Fragment 3 [HASH]
+    CPU: 203.45ms, Scheduled: 410.61ms, Blocked 26.34m (Input: 15.90m, Output: 0.00ns), Input: 125957 rows (9.62MB); per task: avg.: 41985.67 std.dev.: 224.55, Output: 3848 rows (756.02kB)
+    Output layout: [ca_state, sum, c_customer_id, c_salutation, c_first_name, c_last_name, ca_city_2, ca_country_3, ca_county_4, ca_gmt_offset_5, ca_location_type_6, ca_state_7, ca_street_name_8, ca_street_number_9, ca_street_type_10, ca_suite_number_11, ca_zip_12]
+    Output partitioning: HASH [ca_state]
+    InnerJoin[criteria = (""c_current_addr_sk"" = ""expr_84""), distribution = PARTITIONED]
+    │   Layout: [ca_state:varchar, sum:double, c_customer_id:varchar(16), c_salutation:varchar(10), c_first_name:varchar(20), c_last_name:varchar(30), ca_city_2:varchar, ca_country_3:varchar, ca_county_4:varchar, ca_gmt_offset_5:double, ca_location_type_6:varchar, ca_state_7:varchar, ca_street_name_8:varchar, ca_street_number_9:varchar, ca_street_type_10:varchar, ca_suite_number_11:varchar, ca_zip_12:varchar]
+    │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: 0B}
+    │   CPU: 152.00ms (0.80%), Scheduled: 337.00ms (0.04%), Blocked: 3.54m (1.61%), Output: 3848 rows (756.02kB)
+    │   Left (probe) Input avg.: 11802.40 rows, Input std.dev.: 43.83%
+    │   Right (build) Input avg.: 793.30 rows, Input std.dev.: 32.33%
+    │   Distribution: PARTITIONED
+    │   dynamicFilterAssignments = {expr_84 -> #df_2490}
+    ├─ RemoteSource[sourceFragmentIds = [4]]
+    │      Layout: [ca_state:varchar, sum:double, c_customer_id:varchar(16), c_current_addr_sk:bigint, c_salutation:varchar(10), c_first_name:varchar(20), c_last_name:varchar(30)]
+    │      CPU: 6.00ms (0.03%), Scheduled: 8.00ms (0.00%), Blocked: 10.54m (4.79%), Output: 118024 rows (8.51MB)
+    │      Input avg.: 11802.40 rows, Input std.dev.: 43.83%
+    └─ LocalExchange[partitioning = HASH, arguments = [""expr_84""]]
+       │   Layout: [ca_city_2:varchar, ca_country_3:varchar, ca_county_4:varchar, ca_gmt_offset_5:double, ca_location_type_6:varchar, ca_state_7:varchar, ca_street_name_8:varchar, ca_street_number_9:varchar, ca_street_type_10:varchar, ca_suite_number_11:varchar, ca_zip_12:varchar, expr_84:bigint]
+       │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+       │   CPU: 24.00ms (0.13%), Scheduled: 37.00ms (0.00%), Blocked: 5.37m (2.44%), Output: 7933 rows (1.11MB)
+       │   Input avg.: 793.30 rows, Input std.dev.: 97.39%
+       └─ RemoteSource[sourceFragmentIds = [12]]
+              Layout: [ca_city_2:varchar, ca_country_3:varchar, ca_county_4:varchar, ca_gmt_offset_5:double, ca_location_type_6:varchar, ca_state_7:varchar, ca_street_name_8:varchar, ca_street_number_9:varchar, ca_street_type_10:varchar, ca_suite_number_11:varchar, ca_zip_12:varchar, expr_84:bigint]
+              CPU: 12.00ms (0.06%), Scheduled: 17.00ms (0.00%), Blocked: 5.35m (2.43%), Output: 7933 rows (1.11MB)
+              Input avg.: 793.30 rows, Input std.dev.: 97.39%
+
+Fragment 4 [HASH]
+    CPU: 701.64ms, Scheduled: 1.45s, Blocked 30.23m (Input: 19.87m, Output: 0.00ns), Input: 618076 rows (35.55MB); per task: avg.: 206025.33 std.dev.: 67.82, Output: 118024 rows (8.51MB)
+    Output layout: [ca_state, sum, c_customer_id, c_current_addr_sk, c_salutation, c_first_name, c_last_name]
+    Output partitioning: HASH [c_current_addr_sk]
+    InnerJoin[criteria = (""expr_85"" = ""c_customer_sk""), distribution = PARTITIONED]
+    │   Layout: [ca_state:varchar, sum:double, c_customer_id:varchar(16), c_current_addr_sk:bigint, c_salutation:varchar(10), c_first_name:varchar(20), c_last_name:varchar(30)]
+    │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: 0B}
+    │   CPU: 587.00ms (3.10%), Scheduled: 1.24s (0.14%), Blocked: 37.07s (0.28%), Output: 118024 rows (8.51MB)
+    │   Left (probe) Input avg.: 11807.60 rows, Input std.dev.: 37.69%
+    │   Right (build) Input avg.: 50000.00 rows, Input std.dev.: 33.31%
+    │   Distribution: PARTITIONED
+    │   dynamicFilterAssignments = {c_customer_sk -> #df_2491}
+    ├─ RemoteSource[sourceFragmentIds = [5]]
+    │      Layout: [ca_state:varchar, sum:double, expr_85:bigint]
+    │      CPU: 5.00ms (0.03%), Scheduled: 9.00ms (0.00%), Blocked: 10.33m (4.70%), Output: 118076 rows (2.81MB)
+    │      Input avg.: 11807.60 rows, Input std.dev.: 37.69%
+    └─ LocalExchange[partitioning = HASH, arguments = [""c_customer_sk""]]
+       │   Layout: [c_customer_sk:bigint, c_customer_id:varchar(16), c_current_addr_sk:bigint, c_salutation:varchar(10), c_first_name:varchar(20), c_last_name:varchar(30)]
+       │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+       │   CPU: 78.00ms (0.41%), Scheduled: 145.00ms (0.02%), Blocked: 9.69m (4.41%), Output: 500000 rows (32.75MB)
+       │   Input avg.: 50000.00 rows, Input std.dev.: 94.83%
+       └─ RemoteSource[sourceFragmentIds = [11]]
+              Layout: [c_customer_sk:bigint, c_customer_id:varchar(16), c_current_addr_sk:bigint, c_salutation:varchar(10), c_first_name:varchar(20), c_last_name:varchar(30)]
+              CPU: 21.00ms (0.11%), Scheduled: 41.00ms (0.00%), Blocked: 9.54m (4.34%), Output: 500000 rows (32.75MB)
+              Input avg.: 50000.00 rows, Input std.dev.: 94.83%
+
+Fragment 5 [HASH]
+    CPU: 261.74ms, Scheduled: 616.28ms, Blocked 20.38m (Input: 10.20m, Output: 0.00ns), Input: 118848 rows (3.51MB); per task: avg.: 39616.00 std.dev.: 354.76, Output: 118076 rows (2.81MB)
+    Output layout: [ca_state, sum, expr_85]
+    Output partitioning: HASH [expr_85]
+    Project[]
+    │   Layout: [ca_state:varchar, sum:double, expr_85:bigint]
+    │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+    │   CPU: 77.00ms (0.41%), Scheduled: 270.00ms (0.03%), Blocked: 0.00ns (0.00%), Output: 118076 rows (2.81MB)
+    │   Input avg.: 11807.60 rows, Input std.dev.: 33.52%
+    │   expr_85 := CAST(""cr_returning_customer_sk"" AS bigint)
+    └─ Aggregate[type = FINAL, keys = [cr_returning_customer_sk, ca_state]]
+       │   Layout: [cr_returning_customer_sk:integer, ca_state:varchar, sum:double]
+       │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: 0B}
+       │   CPU: 137.00ms (0.72%), Scheduled: 263.00ms (0.03%), Blocked: 0.00ns (0.00%), Output: 118076 rows (2.36MB)
+       │   Input avg.: 11884.80 rows, Input std.dev.: 33.52%
+       │   sum := sum(""sum_89"")
+       └─ LocalExchange[partitioning = HASH, arguments = [""cr_returning_customer_sk"", ""ca_state""]]
+          │   Layout: [cr_returning_customer_sk:integer, ca_state:varchar, sum_89:row(double, bigint)]
+          │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+          │   CPU: 32.00ms (0.17%), Scheduled: 65.00ms (0.01%), Blocked: 10.19m (4.64%), Output: 118848 rows (3.51MB)
+          │   Input avg.: 11884.80 rows, Input std.dev.: 89.66%
+          └─ RemoteSource[sourceFragmentIds = [6]]
+                 Layout: [cr_returning_customer_sk:integer, ca_state:varchar, sum_89:row(double, bigint)]
+                 CPU: 8.00ms (0.04%), Scheduled: 11.00ms (0.00%), Blocked: 10.20m (4.64%), Output: 118848 rows (3.51MB)
+                 Input avg.: 11884.80 rows, Input std.dev.: 89.66%
+
+Fragment 6 [HASH]
+    CPU: 864.45ms, Scheduled: 2.01s, Blocked 23.26m (Input: 13.29m, Output: 0.00ns), Input: 372559 rows (5.07MB); per task: avg.: 124186.33 std.dev.: 1062.83, Output: 118848 rows (3.96MB)
+    Output layout: [cr_returning_customer_sk, ca_state, sum_89]
+    Output partitioning: HASH [cr_returning_customer_sk, ca_state]
+    Aggregate[type = PARTIAL, keys = [cr_returning_customer_sk, ca_state]]
+    │   Layout: [cr_returning_customer_sk:integer, ca_state:varchar, sum_89:row(double, bigint)]
+    │   CPU: 501.00ms (2.64%), Scheduled: 986.00ms (0.11%), Blocked: 0.00ns (0.00%), Output: 118848 rows (3.96MB)
+    │   Input avg.: 12014.90 rows, Input std.dev.: 91.25%
+    │   sum_89 := sum(""cr_return_amt_inc_tax"")
+    └─ InnerJoin[criteria = (""cr_returning_addr_sk"" = ""ca_address_sk""), distribution = PARTITIONED]
+       │   Layout: [cr_return_amt_inc_tax:double, cr_returning_customer_sk:integer, ca_state:varchar]
+       │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: 0B}
+       │   CPU: 314.00ms (1.66%), Scheduled: 915.00ms (0.10%), Blocked: 5.91m (2.69%), Output: 120149 rows (2.70MB)
+       │   Left (probe) Input avg.: 12255.90 rows, Input std.dev.: 94.51%
+       │   Right (build) Input avg.: 25000.00 rows, Input std.dev.: 33.30%
+       │   Distribution: PARTITIONED
+       │   dynamicFilterAssignments = {ca_address_sk -> #df_2492}
+       ├─ RemoteSource[sourceFragmentIds = [7]]
+       │      Layout: [cr_return_amt_inc_tax:double, cr_returning_addr_sk:integer, cr_returning_customer_sk:integer]
+       │      CPU: 4.00ms (0.02%), Scheduled: 6.00ms (0.00%), Blocked: 9.98m (4.54%), Output: 122559 rows (2.22MB)
+       │      Input avg.: 12255.90 rows, Input std.dev.: 94.51%
+       └─ LocalExchange[partitioning = HASH, arguments = [""ca_address_sk""]]
+          │   Layout: [ca_address_sk:integer, ca_state:varchar]
+          │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+          │   CPU: 30.00ms (0.16%), Scheduled: 76.00ms (0.01%), Blocked: 3.38m (1.54%), Output: 250000 rows (2.85MB)
+          │   Input avg.: 25000.00 rows, Input std.dev.: 96.67%
+          └─ RemoteSource[sourceFragmentIds = [10]]
+                 Layout: [ca_address_sk:integer, ca_state:varchar]
+                 CPU: 4.00ms (0.02%), Scheduled: 4.00ms (0.00%), Blocked: 3.31m (1.51%), Output: 250000 rows (2.85MB)
+                 Input avg.: 25000.00 rows, Input std.dev.: 96.67%
+
+Fragment 7 [HASH]
+    CPU: 245.65ms, Scheduled: 624.49ms, Blocked 20.97m (Input: 11.09m, Output: 0.00ns), Input: 1440018 rows (32.95MB); per task: avg.: 480006.00 std.dev.: 6827.12, Output: 122559 rows (2.20MB)
+    Output layout: [cr_return_amt_inc_tax, cr_returning_addr_sk, cr_returning_customer_sk]
+    Output partitioning: HASH [cr_returning_addr_sk]
+    InnerJoin[criteria = (""cr_returned_date_sk"" = ""d_date_sk""), distribution = PARTITIONED]
+    │   Layout: [cr_return_amt_inc_tax:double, cr_returning_addr_sk:integer, cr_returning_customer_sk:integer]
+    │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: 0B}
+    │   CPU: 188.00ms (0.99%), Scheduled: 517.00ms (0.06%), Blocked: 4.30m (1.96%), Output: 122559 rows (2.20MB)
+    │   Left (probe) Input avg.: 143965.30 rows, Input std.dev.: 89.79%
+    │   Right (build) Input avg.: 36.50 rows, Input std.dev.: 39.88%
+    │   Distribution: PARTITIONED
+    │   dynamicFilterAssignments = {d_date_sk -> #df_2493}
+    ├─ RemoteSource[sourceFragmentIds = [8]]
+    │      Layout: [cr_return_amt_inc_tax:double, cr_returned_date_sk:integer, cr_returning_addr_sk:integer, cr_returning_customer_sk:integer]
+    │      CPU: 38.00ms (0.20%), Scheduled: 72.00ms (0.01%), Blocked: 9.85m (4.48%), Output: 1439653 rows (32.95MB)
+    │      Input avg.: 143965.30 rows, Input std.dev.: 89.79%
+    └─ LocalExchange[partitioning = HASH, arguments = [""d_date_sk""]]
+       │   Layout: [d_date_sk:integer]
+       │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+       │   CPU: 9.00ms (0.05%), Scheduled: 27.00ms (0.00%), Blocked: 1.34m (0.61%), Output: 365 rows (1.78kB)
+       │   Input avg.: 36.50 rows, Input std.dev.: 114.32%
+       └─ RemoteSource[sourceFragmentIds = [9]]
+              Layout: [d_date_sk:integer]
+              CPU: 1.00ms (0.01%), Scheduled: 1.00ms (0.00%), Blocked: 1.24m (0.56%), Output: 365 rows (1.78kB)
+              Input avg.: 36.50 rows, Input std.dev.: 114.32%
+
+Fragment 8 [SOURCE]
+    CPU: 2.14s, Scheduled: 3.76m, Blocked 0.00ns (Input: 0.00ns, Output: 0.00ns), Input: 1439653 rows (32.95MB); per task: avg.: 479884.33 std.dev.: 3127.13, Output: 1439653 rows (32.95MB)
+    Output layout: [cr_return_amt_inc_tax, cr_returned_date_sk, cr_returning_addr_sk, cr_returning_customer_sk]
+    Output partitioning: HASH [cr_returned_date_sk]
+    ScanFilter[table = cassandra:CassandraTableHandle{relationHandle=tpcds:catalog_returns}, dynamicFilters = {CAST(""cr_returning_customer_sk"" AS bigint) = #df_2491, ""cr_returning_addr_sk"" = #df_2492, ""cr_returned_date_sk"" = #df_2493}]
+        Layout: [cr_return_amt_inc_tax:double, cr_returned_date_sk:integer, cr_returning_addr_sk:integer, cr_returning_customer_sk:integer]
+        Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}/{rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+        CPU: 2.12s (11.21%), Scheduled: 3.76m (25.72%), Blocked: 0.00ns (0.00%), Output: 1439653 rows (32.95MB)
+        Input avg.: 6484.92 rows, Input std.dev.: 6.10%
+        cr_returning_addr_sk := CassandraColumnHandle{name=cr_returning_addr_sk, ordinalPosition=19, cassandraType=INT(integer), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        cr_returning_customer_sk := CassandraColumnHandle{name=cr_returning_customer_sk, ordinalPosition=21, cassandraType=INT(integer), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        cr_return_amt_inc_tax := CassandraColumnHandle{name=cr_return_amt_inc_tax, ordinalPosition=13, cassandraType=DECIMAL(double), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        cr_returned_date_sk := CassandraColumnHandle{name=cr_returned_date_sk, ordinalPosition=17, cassandraType=INT(integer), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        Input: 1439653 rows (32.95MB), Filtered: 0.00%
+        Dynamic filters: 
+            - df_2491, ALL, collection time=1.04m
+            - df_2492, ALL, collection time=26.35s
+            - df_2493, [ SortedRangeSet[type=integer, ranges=365, {[2450815], ..., [2451179]}] ], collection time=14.31s
+
+Fragment 9 [SOURCE]
+    CPU: 122.03ms, Scheduled: 17.14s, Blocked 0.00ns (Input: 0.00ns, Output: 0.00ns), Input: 73049 rows (0B); per task: avg.: 24349.67 std.dev.: 8381.29, Output: 365 rows (1.78kB)
+    Output layout: [d_date_sk]
+    Output partitioning: HASH [d_date_sk]
+    ScanFilterProject[table = cassandra:CassandraTableHandle{relationHandle=tpcds:date_dim 1 partitions [<UNPARTITIONED>]}, filterPredicate = (""d_year"" = 1998)]
+        Layout: [d_date_sk:integer]
+        Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}/{rows: ? (?), cpu: ?, memory: 0B, network: 0B}/{rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+        CPU: 118.00ms (0.62%), Scheduled: 17.15s (1.95%), Blocked: 0.00ns (0.00%), Output: 365 rows (1.78kB)
+        Input avg.: 1141.39 rows, Input std.dev.: 11.03%
+        d_date_sk := CassandraColumnHandle{name=d_date_sk, ordinalPosition=0, cassandraType=INT(integer), partitionKey=true, clusteringKey=false, indexed=false, hidden=false}
+        d_year := CassandraColumnHandle{name=d_year, ordinalPosition=27, cassandraType=INT(integer), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        Input: 73049 rows (0B), Filtered: 99.50%
+
+Fragment 10 [SOURCE]
+    CPU: 753.35ms, Scheduled: 59.39s, Blocked 0.00ns (Input: 0.00ns, Output: 0.00ns), Input: 250000 rows (2.85MB); per task: avg.: 83333.33 std.dev.: 3448.16, Output: 250000 rows (2.85MB)
+    Output layout: [ca_address_sk, ca_state]
+    Output partitioning: HASH [ca_address_sk]
+    TableScan[table = cassandra:CassandraTableHandle{relationHandle=tpcds:customer_address}]
+        Layout: [ca_address_sk:integer, ca_state:varchar]
+        Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+        CPU: 741.00ms (3.91%), Scheduled: 59.37s (6.76%), Blocked: 0.00ns (0.00%), Output: 250000 rows (2.85MB)
+        Input avg.: 1054.85 rows, Input std.dev.: 3.80%
+        ca_state := CassandraColumnHandle{name=ca_state, ordinalPosition=7, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_address_sk := CassandraColumnHandle{name=ca_address_sk, ordinalPosition=0, cassandraType=INT(integer), partitionKey=true, clusteringKey=false, indexed=false, hidden=false}
+        Input: 250000 rows (2.85MB)
+
+Fragment 11 [SOURCE]
+    CPU: 6.95s, Scheduled: 52.12s, Blocked 0.00ns (Input: 0.00ns, Output: 0.00ns), Input: 500000 rows (32.75MB); per task: avg.: 500000.00 std.dev.: 0.00, Output: 500000 rows (32.75MB)
+    Output layout: [c_customer_sk, c_customer_id, c_current_addr_sk, c_salutation, c_first_name, c_last_name]
+    Output partitioning: HASH [c_customer_sk]
+    ScanFilter[table = mongo:MongoTableHandle{schemaTableName=tpcds.customer, remoteTableName=tpcds.customer, filter=Optional.empty, constraint=ALL, projectedColumns=[c_customer_sk:bigint, c_customer_id:varchar(16), c_current_addr_sk:bigint, c_salutation:varchar(10), c_first_name:varchar(20), c_last_name:varchar(30)], limit=OptionalInt.empty}, dynamicFilters = {""c_current_addr_sk"" = #df_2490}]
+        Layout: [c_customer_sk:bigint, c_customer_id:varchar(16), c_current_addr_sk:bigint, c_salutation:varchar(10), c_first_name:varchar(20), c_last_name:varchar(30)]
+        Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}/{rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+        CPU: 6.96s (36.70%), Scheduled: 52.13s (5.94%), Blocked: 0.00ns (0.00%), Output: 500000 rows (32.75MB)
+        Input avg.: 500000.00 rows, Input std.dev.: 0.00%
+        c_salutation := c_salutation:varchar(10)
+        c_current_addr_sk := c_current_addr_sk:bigint
+        c_customer_sk := c_customer_sk:bigint
+        c_last_name := c_last_name:varchar(30)
+        c_customer_id := c_customer_id:varchar(16)
+        c_first_name := c_first_name:varchar(20)
+        Input: 500000 rows (32.75MB), Filtered: 0.00%
+        Dynamic filters: 
+            - df_2490, ALL, collection time=29.58s
+
+Fragment 12 [SOURCE]
+    CPU: 819.09ms, Scheduled: 1.62m, Blocked 0.00ns (Input: 0.00ns, Output: 0.00ns), Input: 250000 rows (0B); per task: avg.: 83333.33 std.dev.: 124.81, Output: 7933 rows (1.11MB)
+    Output layout: [ca_city_2, ca_country_3, ca_county_4, ca_gmt_offset_5, ca_location_type_6, ca_state_7, ca_street_name_8, ca_street_number_9, ca_street_type_10, ca_suite_number_11, ca_zip_12, expr_84]
+    Output partitioning: HASH [expr_84]
+    ScanFilterProject[table = cassandra:CassandraTableHandle{relationHandle=tpcds:customer_address 1 partitions [<UNPARTITIONED>]}, filterPredicate = (""ca_state_7"" = VARCHAR 'IL')]
+        Layout: [ca_city_2:varchar, ca_country_3:varchar, ca_county_4:varchar, ca_gmt_offset_5:double, ca_location_type_6:varchar, ca_state_7:varchar, ca_street_name_8:varchar, ca_street_number_9:varchar, ca_street_type_10:varchar, ca_suite_number_11:varchar, ca_zip_12:varchar, expr_84:bigint]
+        Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}/{rows: ? (?), cpu: ?, memory: 0B, network: 0B}/{rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+        CPU: 810.00ms (4.27%), Scheduled: 1.62m (11.04%), Blocked: 0.00ns (0.00%), Output: 7933 rows (1.11MB)
+        Input avg.: 1054.85 rows, Input std.dev.: 3.80%
+        expr_84 := CAST(""ca_address_sk_0"" AS bigint)
+        ca_street_number_9 := CassandraColumnHandle{name=ca_street_number, ordinalPosition=9, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_country_3 := CassandraColumnHandle{name=ca_country, ordinalPosition=3, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_gmt_offset_5 := CassandraColumnHandle{name=ca_gmt_offset, ordinalPosition=5, cassandraType=DECIMAL(double), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_street_name_8 := CassandraColumnHandle{name=ca_street_name, ordinalPosition=8, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_street_type_10 := CassandraColumnHandle{name=ca_street_type, ordinalPosition=10, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_zip_12 := CassandraColumnHandle{name=ca_zip, ordinalPosition=12, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_address_sk_0 := CassandraColumnHandle{name=ca_address_sk, ordinalPosition=0, cassandraType=INT(integer), partitionKey=true, clusteringKey=false, indexed=false, hidden=false}
+        ca_location_type_6 := CassandraColumnHandle{name=ca_location_type, ordinalPosition=6, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_state_7 := CassandraColumnHandle{name=ca_state, ordinalPosition=7, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_suite_number_11 := CassandraColumnHandle{name=ca_suite_number, ordinalPosition=11, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_city_2 := CassandraColumnHandle{name=ca_city, ordinalPosition=2, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_county_4 := CassandraColumnHandle{name=ca_county, ordinalPosition=4, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        Input: 250000 rows (0B), Filtered: 96.83%
+
+Fragment 13 [HASH]
+    CPU: 264.93ms, Scheduled: 409.24ms, Blocked 21.42m (Input: 10.72m, Output: 0.00ns), Input: 119000 rows (3.51MB); per task: avg.: 39666.67 std.dev.: 344.84, Output: 520 rows (15.21kB)
+    Output layout: [ca_state_75, avg_90]
+    Output partitioning: HASH [ca_state_75]
+    Aggregate[type = PARTIAL, keys = [ca_state_75]]
+    │   Layout: [ca_state_75:varchar, avg_90:row(double, bigint)]
+    │   CPU: 128.00ms (0.68%), Scheduled: 202.00ms (0.02%), Blocked: 0.00ns (0.00%), Output: 520 rows (15.21kB)
+    │   Input avg.: 11807.60 rows, Input std.dev.: 33.52%
+    │   avg_90 := avg(""sum_83"") (mask = non_null)
+    └─ Project[]
+       │   Layout: [ca_state_75:varchar, non_null:boolean, sum_83:double]
+       │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+       │   CPU: 8.00ms (0.04%), Scheduled: 28.00ms (0.00%), Blocked: 0.00ns (0.00%), Output: 118076 rows (1.80MB)
+       │   Input avg.: 11807.60 rows, Input std.dev.: 33.52%
+       │   non_null := true
+       └─ Project[]
+          │   Layout: [ca_state_75:varchar, sum_83:double]
+          │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+          │   CPU: 9.00ms (0.05%), Scheduled: 14.00ms (0.00%), Blocked: 0.00ns (0.00%), Output: 118076 rows (1.80MB)
+          │   Input avg.: 11807.60 rows, Input std.dev.: 33.52%
+          └─ Aggregate[type = FINAL, keys = [cr_returning_customer_sk_34, ca_state_75]]
+             │   Layout: [cr_returning_customer_sk_34:integer, ca_state_75:varchar, sum_83:double]
+             │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: 0B}
+             │   CPU: 79.00ms (0.42%), Scheduled: 86.00ms (0.01%), Blocked: 0.00ns (0.00%), Output: 118076 rows (2.36MB)
+             │   Input avg.: 11900.00 rows, Input std.dev.: 33.51%
+             │   sum_83 := sum(""sum_91"")
+             └─ LocalExchange[partitioning = HASH, arguments = [""cr_returning_customer_sk_34"", ""ca_state_75""]]
+                │   Layout: [cr_returning_customer_sk_34:integer, ca_state_75:varchar, sum_91:row(double, bigint)]
+                │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+                │   CPU: 24.00ms (0.13%), Scheduled: 51.00ms (0.01%), Blocked: 10.72m (4.88%), Output: 119000 rows (3.51MB)
+                │   Input avg.: 11900.00 rows, Input std.dev.: 51.80%
+                └─ RemoteSource[sourceFragmentIds = [14]]
+                       Layout: [cr_returning_customer_sk_34:integer, ca_state_75:varchar, sum_91:row(double, bigint)]
+                       CPU: 9.00ms (0.05%), Scheduled: 10.00ms (0.00%), Blocked: 10.72m (4.88%), Output: 119000 rows (3.51MB)
+                       Input avg.: 11900.00 rows, Input std.dev.: 51.80%
+
+Fragment 14 [HASH]
+    CPU: 308.27ms, Scheduled: 580.05ms, Blocked 26.31m (Input: 15.08m, Output: 0.00ns), Input: 372559 rows (5.07MB); per task: avg.: 124186.33 std.dev.: 1062.83, Output: 119000 rows (3.97MB)
+    Output layout: [cr_returning_customer_sk_34, ca_state_75, sum_91]
+    Output partitioning: HASH [cr_returning_customer_sk_34, ca_state_75]
+    Aggregate[type = PARTIAL, keys = [cr_returning_customer_sk_34, ca_state_75]]
+    │   Layout: [cr_returning_customer_sk_34:integer, ca_state_75:varchar, sum_91:row(double, bigint)]
+    │   CPU: 119.00ms (0.63%), Scheduled: 237.00ms (0.03%), Blocked: 0.00ns (0.00%), Output: 119000 rows (3.97MB)
+    │   Input avg.: 12014.90 rows, Input std.dev.: 56.22%
+    │   sum_91 := sum(""cr_return_amt_inc_tax_26"")
+    └─ InnerJoin[criteria = (""cr_returning_addr_sk_32"" = ""ca_address_sk_68""), distribution = PARTITIONED]
+       │   Layout: [cr_return_amt_inc_tax_26:double, cr_returning_customer_sk_34:integer, ca_state_75:varchar]
+       │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: 0B}
+       │   CPU: 137.00ms (0.72%), Scheduled: 239.00ms (0.03%), Blocked: 4.16m (1.89%), Output: 120149 rows (2.70MB)
+       │   Left (probe) Input avg.: 12255.90 rows, Input std.dev.: 57.52%
+       │   Right (build) Input avg.: 25000.00 rows, Input std.dev.: 33.30%
+       │   Distribution: PARTITIONED
+       │   dynamicFilterAssignments = {ca_address_sk_68 -> #df_2510}
+       ├─ RemoteSource[sourceFragmentIds = [15]]
+       │      Layout: [cr_return_amt_inc_tax_26:double, cr_returning_addr_sk_32:integer, cr_returning_customer_sk_34:integer]
+       │      CPU: 4.00ms (0.02%), Scheduled: 15.00ms (0.00%), Blocked: 11.32m (5.15%), Output: 122559 rows (2.22MB)
+       │      Input avg.: 12255.90 rows, Input std.dev.: 57.52%
+       └─ LocalExchange[partitioning = HASH, arguments = [""ca_address_sk_68""]]
+          │   Layout: [ca_address_sk_68:integer, ca_state_75:varchar]
+          │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+          │   CPU: 33.00ms (0.17%), Scheduled: 63.00ms (0.01%), Blocked: 4.31m (1.96%), Output: 250000 rows (2.85MB)
+          │   Input avg.: 25000.00 rows, Input std.dev.: 109.83%
+          └─ RemoteSource[sourceFragmentIds = [18]]
+                 Layout: [ca_address_sk_68:integer, ca_state_75:varchar]
+                 CPU: 8.00ms (0.04%), Scheduled: 9.00ms (0.00%), Blocked: 3.78m (1.72%), Output: 250000 rows (2.85MB)
+                 Input avg.: 25000.00 rows, Input std.dev.: 109.83%
+
+Fragment 15 [HASH]
+    CPU: 256.90ms, Scheduled: 576.87ms, Blocked 23.20m (Input: 12.08m, Output: 0.00ns), Input: 1440018 rows (32.95MB); per task: avg.: 480006.00 std.dev.: 6827.12, Output: 122559 rows (2.20MB)
+    Output layout: [cr_return_amt_inc_tax_26, cr_returning_addr_sk_32, cr_returning_customer_sk_34]
+    Output partitioning: HASH [cr_returning_addr_sk_32]
+    InnerJoin[criteria = (""cr_returned_date_sk_30"" = ""d_date_sk_40""), distribution = PARTITIONED]
+    │   Layout: [cr_return_amt_inc_tax_26:double, cr_returning_addr_sk_32:integer, cr_returning_customer_sk_34:integer]
+    │   Estimates: {rows: ? (?), cpu: ?, memory: ?, network: 0B}
+    │   CPU: 193.00ms (1.02%), Scheduled: 437.00ms (0.05%), Blocked: 5.37m (2.44%), Output: 122559 rows (2.20MB)
+    │   Left (probe) Input avg.: 143965.30 rows, Input std.dev.: 63.26%
+    │   Right (build) Input avg.: 36.50 rows, Input std.dev.: 39.88%
+    │   Distribution: PARTITIONED
+    │   dynamicFilterAssignments = {d_date_sk_40 -> #df_2511}
+    ├─ RemoteSource[sourceFragmentIds = [16]]
+    │      Layout: [cr_return_amt_inc_tax_26:double, cr_returned_date_sk_30:integer, cr_returning_addr_sk_32:integer, cr_returning_customer_sk_34:integer]
+    │      CPU: 44.00ms (0.23%), Scheduled: 94.00ms (0.01%), Blocked: 10.32m (4.69%), Output: 1439653 rows (32.95MB)
+    │      Input avg.: 143965.30 rows, Input std.dev.: 63.26%
+    └─ LocalExchange[partitioning = HASH, arguments = [""d_date_sk_40""]]
+       │   Layout: [d_date_sk_40:integer]
+       │   Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+       │   CPU: 5.00ms (0.03%), Scheduled: 22.00ms (0.00%), Blocked: 2.05m (0.93%), Output: 365 rows (1.78kB)
+       │   Input avg.: 36.50 rows, Input std.dev.: 127.94%
+       └─ RemoteSource[sourceFragmentIds = [17]]
+              Layout: [d_date_sk_40:integer]
+              CPU: 3.00ms (0.02%), Scheduled: 3.00ms (0.00%), Blocked: 1.75m (0.80%), Output: 365 rows (1.78kB)
+              Input avg.: 36.50 rows, Input std.dev.: 127.94%
+
+Fragment 16 [SOURCE]
+    CPU: 2.23s, Scheduled: 4.13m, Blocked 0.00ns (Input: 0.00ns, Output: 0.00ns), Input: 1439653 rows (32.95MB); per task: avg.: 479884.33 std.dev.: 227708.29, Output: 1439653 rows (32.95MB)
+    Output layout: [cr_return_amt_inc_tax_26, cr_returned_date_sk_30, cr_returning_addr_sk_32, cr_returning_customer_sk_34]
+    Output partitioning: HASH [cr_returned_date_sk_30]
+    ScanFilter[table = cassandra:CassandraTableHandle{relationHandle=tpcds:catalog_returns}, dynamicFilters = {""cr_returning_addr_sk_32"" = #df_2510, ""cr_returned_date_sk_30"" = #df_2511}]
+        Layout: [cr_return_amt_inc_tax_26:double, cr_returned_date_sk_30:integer, cr_returning_addr_sk_32:integer, cr_returning_customer_sk_34:integer]
+        Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}/{rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+        CPU: 2.22s (11.73%), Scheduled: 4.12m (28.16%), Blocked: 0.00ns (0.00%), Output: 1439653 rows (32.95MB)
+        Input avg.: 6484.92 rows, Input std.dev.: 6.10%
+        cr_returning_addr_sk_32 := CassandraColumnHandle{name=cr_returning_addr_sk, ordinalPosition=19, cassandraType=INT(integer), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        cr_returned_date_sk_30 := CassandraColumnHandle{name=cr_returned_date_sk, ordinalPosition=17, cassandraType=INT(integer), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        cr_return_amt_inc_tax_26 := CassandraColumnHandle{name=cr_return_amt_inc_tax, ordinalPosition=13, cassandraType=DECIMAL(double), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        cr_returning_customer_sk_34 := CassandraColumnHandle{name=cr_returning_customer_sk, ordinalPosition=21, cassandraType=INT(integer), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        Input: 1439653 rows (32.95MB), Filtered: 0.00%
+        Dynamic filters: 
+            - df_2510, ALL, collection time=27.53s
+            - df_2511, [ SortedRangeSet[type=integer, ranges=365, {[2450815], ..., [2451179]}] ], collection time=14.30s
+
+Fragment 17 [SOURCE]
+    CPU: 1.81s, Scheduled: 1.83m, Blocked 0.00ns (Input: 0.00ns, Output: 0.00ns), Input: 73049 rows (0B); per task: avg.: 24349.67 std.dev.: 408.77, Output: 365 rows (1.78kB)
+    Output layout: [d_date_sk_40]
+    Output partitioning: HASH [d_date_sk_40]
+    ScanFilterProject[table = cassandra:CassandraTableHandle{relationHandle=tpcds:date_dim 1 partitions [<UNPARTITIONED>]}, filterPredicate = (""d_year_67"" = 1998)]
+        Layout: [d_date_sk_40:integer]
+        Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}/{rows: ? (?), cpu: ?, memory: 0B, network: 0B}/{rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+        CPU: 1.81s (9.53%), Scheduled: 1.83m (12.53%), Blocked: 0.00ns (0.00%), Output: 365 rows (1.78kB)
+        Input avg.: 1141.39 rows, Input std.dev.: 11.03%
+        d_year_67 := CassandraColumnHandle{name=d_year, ordinalPosition=27, cassandraType=INT(integer), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        d_date_sk_40 := CassandraColumnHandle{name=d_date_sk, ordinalPosition=0, cassandraType=INT(integer), partitionKey=true, clusteringKey=false, indexed=false, hidden=false}
+        Input: 73049 rows (0B), Filtered: 99.50%
+
+Fragment 18 [SOURCE]
+    CPU: 898.00ms, Scheduled: 1.03m, Blocked 0.00ns (Input: 0.00ns, Output: 0.00ns), Input: 250000 rows (2.85MB); per task: avg.: 83333.33 std.dev.: 257.66, Output: 250000 rows (2.85MB)
+    Output layout: [ca_address_sk_68, ca_state_75]
+    Output partitioning: HASH [ca_address_sk_68]
+    TableScan[table = cassandra:CassandraTableHandle{relationHandle=tpcds:customer_address}]
+        Layout: [ca_address_sk_68:integer, ca_state_75:varchar]
+        Estimates: {rows: ? (?), cpu: ?, memory: 0B, network: 0B}
+        CPU: 887.00ms (4.68%), Scheduled: 1.03m (7.05%), Blocked: 0.00ns (0.00%), Output: 250000 rows (2.85MB)
+        Input avg.: 1054.85 rows, Input std.dev.: 3.80%
+        ca_state_75 := CassandraColumnHandle{name=ca_state, ordinalPosition=7, cassandraType=VARCHAR(varchar), partitionKey=false, clusteringKey=false, indexed=false, hidden=false}
+        ca_address_sk_68 := CassandraColumnHandle{name=ca_address_sk, ordinalPosition=0, cassandraType=INT(integer), partitionKey=true, clusteringKey=false, indexed=false, hidden=false}
+        Input: 250000 rows (2.85MB)
+
+Fragment 19 [SINGLE]
+    CPU: 2.04ms, Scheduled: 12.00ms, Blocked 0.00ns (Input: 0.00ns, Output: 0.00ns), Input: 1 row (11B); per task: avg.: 1.00 std.dev.: 0.00, Output: 1 row (9B)
+    Output layout: [avg_88]
+    Output partitioning: BROADCAST []
+    Aggregate[]
+    │   Layout: [avg_88:double]
+    │   Estimates: {rows: 1 (9B), cpu: 2, memory: 9B, network: 0B}
+    │   CPU: 2.00ms (0.01%), Scheduled: 12.00ms (0.00%), Blocked: 0.00ns (0.00%), Output: 1 row (9B)
+    │   Input avg.: 1.00 rows, Input std.dev.: 0.00%
+    │   avg_88 := avg(""null_87"") (mask = null_86)
+    └─ Values[]
+           Layout: [null_86:boolean, null_87:double]
+           Estimates: {rows: 1 (2B), cpu: 0, memory: 0B, network: 0B}
+           CPU: 0.00ns (0.00%), Scheduled: 0.00ns (0.00%), Blocked: 0.00ns (0.00%), Output: 1 row (11B)
+           Input avg.: 1.00 rows, Input std.dev.: 0.00%
+           (CAST(null AS boolean), CAST(null AS double))
+
+"

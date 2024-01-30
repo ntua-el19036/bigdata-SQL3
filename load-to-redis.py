@@ -46,7 +46,7 @@ def main():
     redis_client = redis.StrictRedis(host=redis_host, port=redis_port, password=redis_password, decode_responses=True)
 
     # Directory containing the JSON files
-    json_data_folder = '../json_data'  # Change this to the actual path
+    json_data_folder = '../../json_data'  # Change this to the actual path
 
     # Iterate through the JSON files and insert data into Redis
     for table in tables_dict:

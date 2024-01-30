@@ -7,11 +7,11 @@ from config.tables_redis_for_json import tables_dict
 
 # Create a folder named 'json_data' in the script directory
 #output_folder = os.path.join(parent_directory, 'json_data')
-output_folder = '/media/user/fs2/json_data'
+output_folder = '../json_data'
 os.makedirs(output_folder, exist_ok=True)
 
 #data_folder = os.path.join(parent_directory, 'data')
-data_folder = '/media/user/fs2/data'
+data_folder = '../data'
 os.makedirs(data_folder, exist_ok=True)
 
 def parse_and_transform(line, column_names):
@@ -93,7 +93,7 @@ def main():
         table_name = table['table_name']
         batch_size = table['batch_size']
         if (table_name == 'inventory'):
-            gen_data_command = f"cd ../tpcds-kit/tools && ./dsdgen -SCALE 20 -DIR /media/user/fs2/data -RNGSEED 1 -TABLE {table_name} && cd -"
+            gen_data_command = f"cd ../tpcds-kit/tools && ./dsdgen -SCALE 20 {data_folder} -RNGSEED 1 -TABLE {table_name} && cd -"
             process = subprocess.run(gen_data_command, shell=True)
             process.check_returncode()
 

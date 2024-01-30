@@ -50,7 +50,7 @@ def insert_into_Mongo(json_file, table_name, client, column_names, column_dataty
 def main():
     client = MongoClient('mongodb://worker2:27017/')
     # Directory containing the JSON files
-    json_data_folder = '../json_data'  # Change this to the actual path
+    json_data_folder = '../../json_data'  # Change this to the actual path
 
     # Iterate through the JSON files and insert data into Mongo
     for table in tables_dict:

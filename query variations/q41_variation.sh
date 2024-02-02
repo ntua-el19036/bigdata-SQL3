@@ -12,7 +12,7 @@ new_filename="query_41_$1.sql"
 sed_args="3 s/item/$2.tpcds.item/;"
 sed_args+="6 s/item/$3.tpcds.item/;"
 
-sed "$sed_args" query_41.sql > "${new_filename}"
+sed "$sed_args" ../queries/query_41.sql > "${new_filename}"
 
 echo "Created ${new_filename}"
 

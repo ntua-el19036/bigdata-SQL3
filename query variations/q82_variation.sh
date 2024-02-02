@@ -14,7 +14,7 @@ sed_args+="5 s/inventory/$3.tpcds.inventory/g;"
 sed_args+="5 s/date_dim/$4.tpcds.date_dim/g;"
 sed_args+="5 s/store_sales/$5.tpcds.store_sales/g;"
 
-sed "$sed_args" query_82.sql > "${new_filename}"
+sed "$sed_args" ../queries/query_82.sql > "${new_filename}"
 
 echo "Created ${new_filename}"
 

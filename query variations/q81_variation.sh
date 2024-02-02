@@ -15,7 +15,7 @@ sed_args+="8 s/customer_address/$4.tpcds.customer_address/g;"
 sed_args+="18 s/customer_address/$4.tpcds.customer_address/g;"
 sed_args+="19 s/customer/$5.tpcds.customer/g;"
 
-sed "$sed_args" query_81.sql > "${new_filename}"
+sed "$sed_args" ../queries/query_81.sql > "${new_filename}"
 
 echo "Created ${new_filename}"
 

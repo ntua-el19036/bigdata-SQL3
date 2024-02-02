@@ -19,7 +19,7 @@ sed_args+="32 s/store_sales/$7.tpcds.store_sales/g;"
 sed_args+="33 s/store_returns/$8.tpcds.store_returns/g;"
 sed_args+="34 s/date_dim/$4.tpcds.date_dim/g;"
 
-sed "$sed_args" query_78.sql > "${new_filename}"
+sed "$sed_args" ../queries/query_78.sql > "${new_filename}"
 
 echo "Created ${new_filename}"
 

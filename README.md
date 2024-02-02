@@ -1,8 +1,18 @@
-# SQL3
-<details>
-<summary><h2>Installation</h2></summary>
+# SQL3 - Distributed Execution of SQL Queries
+## Installation
 Prerequisites:
-- Cassandra: Java jdk 11
+- Cassandra: Java JDK 8
+
+### Redis
+For the Redis installation in Ubuntu 22.04:
+```
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+
+sudo apt-get update
+sudo apt-get install redis
+```
 
 ### MongoDB
 For the MongoDB installation in Ubuntu 22.04:
@@ -64,20 +74,42 @@ For the Cassandra installation in Ubuntu 22.04:
   ```
   bin/cqlsh
   ```
-</details>
 
-## Data Parsing
+In order to allow connections to the Cassandra server from other nodes the following additions to "$CASSANDRA_HOME/conf/cassandra.yaml" are necessary:
+```
+rpc_address: 0.0.0.0
+broadcast_rpc_address: <host IP>
+```
+
+## Data Generation & Parsing
 The raw data from `.dat` files are parsed and converted to `.json` to be loaded to Mongo and Redis:
-- have the `.dat` files in a directory named "_data_", in the directory where you cloned this repo
-- run the script "_dat-to-json.-parse.py_"
+- Generate `.dat` files and convert them to `.json` using the script "_gen_json.py_"
 
-The raw data from .dat files are parsed and converted to .csv to be loaded to Cassandra:
-- have the `.dat` files in a directory named "_data_", in the directory where you cloned this repo
-- run the script "_convert-to-csv.py_"
+The raw data from `.dat` files are parsed and converted to `.csv` to be loaded to Cassandra:
+- Generate `.dat` files in a directory named "_data_" using the script "_gen_dat.py_"
+- Run the script "_convert-to-csv.py_"
 
 ## Data Loading
-We used dsbulk to load csv files to Cassanda. The steps to install it are:
+Load the `.json` or `.csv` files to each data store with the following scripts:
+
+-Redis: "_load-to-redis.py_"
+
+-MongoDB: "_load-to-mongo-json.py_"
+
+-Cassandra: "_load-to-cassandra.py_"
+
+
+We use dsbulk to load csv files to Cassanda. The steps to install it are:
 1. Download the binary tarball from the DSBulk Loader's Github repo: https://github.com/datastax/dsbulk/releases/tag/1.11.0
 2. Unpack the downloaded distribution
 3. Add the `bin` directory of the DSBulk distribution into the `PATH` by adding ```export PATH=/home/user/dsbulk-1.11.0/bin:$PATH``` to the ~/.bashrc file and executing the updated file with the command: ```source ~/.bashrc```
-4. Verify the dsbulk version with the command : ```dsbulk --version``` 
+4. Verify the dsbulk version with the command : ```dsbulk --version```
+
+## Trino Installation & Configuration
+Trino is installed and configured according to the [documentation](https://trino.io/docs/435/installation/deployment.html) of version 435.
+Configuration files are included in the ```config/etc``` directory. 
+We create one catalog per data source: redis, mongo and cassandra.
+
+## Query Execution
+First, we generate the orgiginal queries from TPC-DS. 
+The script "_create_variations.sh_" is used to create new `.sql` files that determine which data source to use for each table.
